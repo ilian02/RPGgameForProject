@@ -10,12 +10,13 @@ namespace TextBasedRPGGame.Controllers
     public class GameLoop
     {
 
-        Heros hero = new Heros("The One And Only");
+        Heros hero;
         IngameMenu ingameMenu = new IngameMenu();
         CharacterInfo characterInfo = new CharacterInfo();
 
-        public GameLoop()
+        public GameLoop(Heros hero)
         {
+            this.hero = hero;
             GameIsPlaying();
         }
 
@@ -27,6 +28,7 @@ namespace TextBasedRPGGame.Controllers
             {
                 case "c": characterInfo.showCharacterInfo(hero);
                     break;
+                
             }
         }
     }

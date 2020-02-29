@@ -22,7 +22,7 @@ namespace TextBasedRPGGame.Views
 
             int command = int.Parse(Console.ReadLine());
             Console.WriteLine("You have chosen - " + heros[command - 1].name);
-            return command;
+            return command  - 1;
         }
 
 

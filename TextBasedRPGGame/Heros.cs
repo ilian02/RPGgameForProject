@@ -34,16 +34,10 @@ namespace TextBasedRPGGame
             inventory.Add(this.weapon);
             inventory.Add(this.armor);
             level = 1;
+            place = "Starting village";
         }
 
-        
-        /*public void appointLevels(int levelPoints)
-        {
-            for (int i = 0; i < levelPoints;i++)
-            {
-
-            }
-        }*/
+       
 
     }
 }

@@ -17,6 +17,7 @@ namespace TextBasedRPGGame.Views
             Console.WriteLine($"Dexterity: {hero.dexterity}");
 
             Console.WriteLine($"Current HealthPoints: {hero.currentHealthPoints} / {hero.healthPoints}");
+            Console.WriteLine($"Current place is {hero.place}");
 
             showInventory(hero);
         }

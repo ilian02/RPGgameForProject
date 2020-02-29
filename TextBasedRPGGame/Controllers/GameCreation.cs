@@ -13,6 +13,7 @@ namespace TextBasedRPGGame.Controllers
         CharacterCreation charCreation = new CharacterCreation();
         List<Heros> heros = new List<Heros>();
         WelcomeMenu welcomeMenu = new WelcomeMenu();
+        GameLoop gameLoop;
 
         public GameCreation()
         {
@@ -25,14 +26,15 @@ namespace TextBasedRPGGame.Controllers
             switch(command)
             {
                 case "c": heros.Add(charCreation.CharacterCreationMenu());
+                    gameLoop = new GameLoop(heros.Last());
                     break;
-                case "l": charSelect.CharacterSelectMenu(heros);
+                case "l":  gameLoop = new GameLoop(heros[charSelect.CharacterSelectMenu(heros)]);
                     break;
                 case "a": Console.WriteLine("This is it for now");
                     break;
                
             }
-           
+
 
 
         }
