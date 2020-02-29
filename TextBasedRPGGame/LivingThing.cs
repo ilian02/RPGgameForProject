@@ -9,23 +9,12 @@ namespace TextBasedRPGGame
     public class LivingThing
     {
 
-        public int hitPoints
-        {
-            set
-            {
-                if (value >= 0)
-                    hitPoints = value;
-            }
-            get
-            {
-                return hitPoints;
-            }
-        }
-
+        public int healthPoints { get; set; }
 
         public int vitality { set; get; }
         public int dexterity { get; set; }
         public int strength { get; set; }
+        public int currentHealthPoints { get; set; }
 
         public void Attack(LivingThing enemy)
         {
@@ -34,13 +23,13 @@ namespace TextBasedRPGGame
 
         public void IsHit(int damagePoints)
         {
-            hitPoints -= damagePoints;
+            healthPoints -= damagePoints;
             IsDead();
         }
 
         public bool IsDead()
         {
-            if (hitPoints <= 0)
+            if (healthPoints <= 0)
                 return true;
             return false;
         }

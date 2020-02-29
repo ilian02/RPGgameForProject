@@ -53,6 +53,8 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Items\Weapon.cs" />
+    <Compile Include="Views\CharacterInfo.cs" />
+    <Compile Include="Views\IngameMenu.cs" />
     <Compile Include="Views\WelcomeMenu.cs" />
   </ItemGroup>
   <ItemGroup>

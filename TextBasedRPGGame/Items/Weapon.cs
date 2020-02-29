@@ -11,27 +11,20 @@ namespace TextBasedRPGGame
 
         public int attackPoints { get; set; }
 
-        public Weapon(int attackPoints,int durability, string name)
+        public Weapon(String name, int sellPrice, String type, int attackPoints) : base(name, sellPrice, type)
         {
             this.attackPoints = attackPoints;
-            this.durability = durability;
             this.type = "weapon";
             this.name = name;
         }
 
-
-        public void BeingUsed()
+        public String toString()
         {
-            durability--;
-            IsBroken();
-        }
+            StringBuilder sb = new StringBuilder("name");
 
-        public void IsBroken()
-        {
-            if (durability <= 0)
-            {
-                attackPoints = attackPoints / 2;
-            }
+            sb.Append($"Attack damage: {attackPoints}");
+
+            return sb.ToString();
         }
     }
 }

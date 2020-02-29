@@ -12,26 +12,20 @@ namespace TextBasedRPGGame
         public int defence { get; set; }
         public bool isEquiped { get; set; }
 
-        public Armor(int defencePoints, int durability, String name)
+        public Armor(String name, int sellPrice, String type, int defencePoints) : base(name, sellPrice, type)
         {
             this.defence = defencePoints;
-            this.durability = durability;
             this.type = "armor";
             this.name = name;
         }
 
-        public void BeingUsed()
+        public String toString()
         {
-            durability--;
-            IsBroken();
-        }
+            StringBuilder sb = new StringBuilder("name");
 
-        public void IsBroken()
-        {
-            if (durability <= 0)
-            {
-                defence = defence / 2;
-            }
+            sb.Append($"Defence points: {defence}");
+
+            return sb.ToString();
         }
 
     }

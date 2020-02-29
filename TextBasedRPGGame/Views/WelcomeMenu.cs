@@ -23,5 +23,7 @@ namespace TextBasedRPGGame.Views
             return new CharacterCreation(nickname);
         }
 
+
+        
     }
 }

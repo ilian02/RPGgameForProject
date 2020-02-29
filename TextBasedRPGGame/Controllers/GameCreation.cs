@@ -8,11 +8,10 @@ namespace TextBasedRPGGame.Controllers
 {
     class GameCreation
     {
-
-
         public GameCreation()
         {
-
+            
+           // GameIsPlaying();
         }
 
 

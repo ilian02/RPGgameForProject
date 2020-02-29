@@ -12,7 +12,29 @@ namespace TextBasedRPGGame
         public String name { get; set; }
         public int sellPrice { get; set; }
         public String type { get; set; }
-        public int durability { get; set; }
 
+        public Item(String name, int sellPrice, String type)
+        {
+            this.name = name;
+            this.sellPrice = sellPrice;
+            this.type = type;
+        }
+
+        public String toString()
+        {
+            return $"{type}, {name}";
+        }
+
+        public String toStringFull()
+        {
+
+            StringBuilder sb = new StringBuilder();
+
+            sb.Append("Type: " + type);
+            sb.Append("Name: " + name);
+            sb.Append("Sell price: " + sellPrice);
+
+            return sb.ToString();
+        }
     }
 }
