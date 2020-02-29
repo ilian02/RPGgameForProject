@@ -15,6 +15,7 @@ namespace TextBasedRPGGame
         public int dexterity { get; set; }
         public int strength { get; set; }
         public int currentHealthPoints { get; set; }
+        public int level { get; set; }
 
         public void Attack(LivingThing enemy)
         {

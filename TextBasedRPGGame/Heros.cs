@@ -33,6 +33,7 @@ namespace TextBasedRPGGame
             inventory = new List<Item>();
             inventory.Add(this.weapon);
             inventory.Add(this.armor);
+            level = 1;
         }
 
         

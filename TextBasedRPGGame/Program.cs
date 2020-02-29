@@ -7,11 +7,11 @@ using TextBasedRPGGame.Controllers;
 
 namespace TextBasedRPGGame
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            GameLoop gameLoop = new GameLoop();
+            GameCreation gameCreation = new GameCreation();
 
 
         }

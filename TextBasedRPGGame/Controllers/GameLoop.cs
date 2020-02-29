@@ -7,7 +7,7 @@ using TextBasedRPGGame.Views;
 
 namespace TextBasedRPGGame.Controllers
 {
-    class GameLoop
+    public class GameLoop
     {
 
         Heros hero = new Heros("The One And Only");

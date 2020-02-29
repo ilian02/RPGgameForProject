@@ -10,17 +10,17 @@ namespace TextBasedRPGGame.Views
     public class WelcomeMenu
     {
 
-        public String nickname { get; set; }
 
-        public CharacterCreation WelcomeMenuPrint()
+        public String WelcomeMenuPrint()
         {
             Console.WriteLine("----------------------------------");
-         
-            Console.WriteLine("Please write your nickname");
-            nickname = Console.ReadLine();
-            Console.WriteLine($"Welcome, {nickname}, to my work in progress");
+            Console.WriteLine("Welcome to my work in progress");
 
-            return new CharacterCreation(nickname);
+            Console.WriteLine("(C)reate new character");
+            Console.WriteLine("(L)oad saved character");
+            Console.WriteLine("(A)bout the game");
+
+            return Console.ReadLine().ToLower();
         }
 
 
