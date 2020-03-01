@@ -9,10 +9,10 @@ namespace TextBasedRPGGame.Views
     public class CharacterSelect
     {
 
-        public int CharacterSelectMenu(List<Heros> heros)
+        public int CharacterSelectMenu(List<Hero> heros)
         {
             int i = 1;
-            foreach(Heros hero in heros)
+            foreach(Hero hero in heros)
             {
                 Console.WriteLine($"{i}: {hero.name} / {hero.level} level");
                 i++;

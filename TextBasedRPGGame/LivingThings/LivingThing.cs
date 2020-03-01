@@ -16,6 +16,7 @@ namespace TextBasedRPGGame
         public int strength { get; set; }
         public int currentHealthPoints { get; set; }
         public int level { get; set; }
+        public String name { get; set; }
 
         public void Attack(LivingThing enemy)
         {
@@ -34,5 +35,17 @@ namespace TextBasedRPGGame
                 return true;
             return false;
         }
+
+        public LivingThing(String name, int strength, int vitality, int dexterity, int level, int currentHealthPoints)
+        {
+            this.name = name;
+            this.strength = strength;
+            this.vitality = vitality;
+            this.dexterity = dexterity;
+            this.healthPoints = 10 + 5 * vitality;
+            this.currentHealthPoints = currentHealthPoints;
+            this.level = level;
+        }
+
     }
 }

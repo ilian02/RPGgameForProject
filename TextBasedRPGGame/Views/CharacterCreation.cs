@@ -9,10 +9,10 @@ namespace TextBasedRPGGame.Views
     class CharacterCreation
     {
 
-        public Heros CharacterCreationMenu()
+        public Hero CharacterCreationMenu()
         {
             Console.WriteLine("Pick a name for your new Hero: ");
-            return new Heros(Console.ReadLine());
+            return new Hero(Console.ReadLine(), 1, 1, 1, 1, 15);
         }
 
     }

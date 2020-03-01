@@ -11,9 +11,12 @@ namespace TextBasedRPGGame
     {
         static void Main(string[] args)
         {
+
             GameCreation gameCreation = new GameCreation();
 
+            //Place place = new Place("Starting Village", true, true, true, true, new List<Enemy>());
 
+            //Console.WriteLine(place.name);
         }
     }
 }

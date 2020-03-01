@@ -9,7 +9,7 @@ namespace TextBasedRPGGame.Views
     class CharacterInfo
     {
 
-        public void showCharacterInfo(Heros hero)
+        public void showCharacterInfo(Hero hero)
         {
             Console.WriteLine($"{hero.name} current stats: ");
             Console.WriteLine($"Strenght: {hero.strength}");
@@ -17,12 +17,15 @@ namespace TextBasedRPGGame.Views
             Console.WriteLine($"Dexterity: {hero.dexterity}");
 
             Console.WriteLine($"Current HealthPoints: {hero.currentHealthPoints} / {hero.healthPoints}");
-            Console.WriteLine($"Current place is {hero.place}");
+            Console.WriteLine($"Current place is {hero.charPlace.name}");
 
             showInventory(hero);
+
+            Console.WriteLine();
+            Console.WriteLine();
         }
 
-        public void showInventory(Heros hero)
+        public void showInventory(Hero hero)
         {
 
             foreach(Item item in hero.inventory)

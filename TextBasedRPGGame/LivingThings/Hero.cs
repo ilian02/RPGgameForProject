@@ -6,35 +6,32 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPGGame
 {
-    public class Heros : LivingThing
+    public class Hero : LivingThing
     {
 
         public List<Item> inventory;
 
+
+        public int money { get; set; }
         public Weapon weapon;
         public Armor armor;
-
         public int experiencePoints;
-        public String name;
+        public Place charPlace;
+        public String placeName;
 
-        public String place;
-
-        public Heros(String name)
+        public Hero(String name, int strength, int vitality, int dexterity,/*
+            */int level, int currentHealthPoints) : base(name, strength, vitality, dexterity, level, currentHealthPoints)
         {
-            this.name = name;
             this.weapon = new Weapon("Wooden small sword", 10, "weapon", 5);
             this.armor = new Armor("Starter leather armor", 10, "armor", 5);
-            strength = 1;
-            vitality = 1;
-            dexterity = 1;
-            currentHealthPoints = 10 + 5 * vitality;
-            healthPoints = currentHealthPoints;
             experiencePoints = 0;
+            money = 100;
             inventory = new List<Item>();
             inventory.Add(this.weapon);
             inventory.Add(this.armor);
-            level = 1;
-            place = "Starting village";
+           
+            charPlace = new Place("Starting Village", true, true, true, true, new List<Enemy>());
+            this.placeName = this.charPlace.name;
         }
 
        

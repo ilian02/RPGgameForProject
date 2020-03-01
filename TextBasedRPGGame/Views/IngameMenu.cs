@@ -13,6 +13,8 @@ namespace TextBasedRPGGame.Views
         {
             Console.WriteLine("(C)haracter information");
 
+            Console.WriteLine("(L)ocation information");
+
             return Console.ReadLine().ToLower();
         }
 

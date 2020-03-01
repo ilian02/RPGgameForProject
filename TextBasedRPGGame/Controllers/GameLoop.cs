@@ -10,11 +10,11 @@ namespace TextBasedRPGGame.Controllers
     public class GameLoop
     {
 
-        Heros hero;
+        Hero hero;
         IngameMenu ingameMenu = new IngameMenu();
         CharacterInfo characterInfo = new CharacterInfo();
 
-        public GameLoop(Heros hero)
+        public GameLoop(Hero hero)
         {
             this.hero = hero;
             GameIsPlaying();
@@ -24,11 +24,21 @@ namespace TextBasedRPGGame.Controllers
         {
             String command = ingameMenu.Menu();
 
-            switch(command)
+            while (command != "e")
             {
-                case "c": characterInfo.showCharacterInfo(hero);
-                    break;
-                
+
+                switch (command)
+                {
+                    case "c":
+                        characterInfo.showCharacterInfo(hero);
+                        break;
+                    case "l":
+                        hero.charPlace.showPlaceInformation();
+                        break;
+
+                }
+
+                command = ingameMenu.Menu();
             }
         }
     }
