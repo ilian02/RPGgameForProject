@@ -13,6 +13,7 @@ namespace TextBasedRPGGame
         public int sellPrice { get; set; }
         public String type { get; set; }
 
+
         public Item(String name, int sellPrice, String type)
         {
             this.name = name;

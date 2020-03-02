@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPGGame.Views
 {
-    class CharacterCreation
+    public class CharacterCreation
     {
 
         public Hero CharacterCreationMenu()

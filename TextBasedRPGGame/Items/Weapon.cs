@@ -26,5 +26,10 @@ namespace TextBasedRPGGame
 
             return sb.ToString();
         }
+
+        public void attack()
+        {
+            Console.WriteLine("attack");
+        }
     }
 }

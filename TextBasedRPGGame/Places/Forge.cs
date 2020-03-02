@@ -6,7 +6,12 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPGGame.Places
 {
-    class Forge
+    public class Forge
     {
+
+
+
+
+
     }
 }

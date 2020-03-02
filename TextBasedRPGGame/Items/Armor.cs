@@ -9,12 +9,12 @@ namespace TextBasedRPGGame
     public class Armor : Item
     {
 
-        public int defence { get; set; }
+        public int defencePoints { get; set; }
         public bool isEquiped { get; set; }
 
         public Armor(String name, int sellPrice, String type, int defencePoints) : base(name, sellPrice, type)
         {
-            this.defence = defencePoints;
+            this.defencePoints = defencePoints;
             this.type = "armor";
             this.name = name;
         }
@@ -23,7 +23,7 @@ namespace TextBasedRPGGame
         {
             StringBuilder sb = new StringBuilder("name");
 
-            sb.Append($"Defence points: {defence}");
+            sb.Append($"Defence points: {defencePoints}");
 
             return sb.ToString();
         }

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPGGame.Views
 {
-    class CharacterInfo
+    public class CharacterInfo
     {
 
         public void showCharacterInfo(Hero hero)

@@ -20,7 +20,8 @@ namespace TextBasedRPGGame.Controllers
 
             heros.Add(new Hero("pesho", 5,  3, 4, 6, 25));
             heros.Add(new Hero("ivan", 55, 78, 25, 150, 100));
-            Place place = new Place("Starting Village", true, true, true, true, new List<Enemy>());
+            Place place = new Place("Starting Village", true, true, true, true, new List<Enemy>(), new List<Item>());
+            
 
 
             heros[0].charPlace = place;

@@ -9,7 +9,7 @@ namespace TextBasedRPGGame
     public class Place
     {
         public List<Enemy> enemyList = new List<Enemy>();
-
+        public List<Item> shopList = new List<Item>();
 
 
         public String name { get; set; }
@@ -40,7 +40,7 @@ namespace TextBasedRPGGame
             }
             if (bed)
             {
-                showBed();
+                showBed();               
             }
             if (fightEnemy)
             {
@@ -53,7 +53,7 @@ namespace TextBasedRPGGame
 
 
 
-        public Place (String name, bool forge, bool bed, bool shop, bool enemies, List<Enemy> enemyList)
+        public Place (String name, bool forge, bool bed, bool shop, bool enemies, List<Enemy> enemyList, List<Item> shopList)
         {
             this.name = name;
             this.forge = forge;
@@ -61,6 +61,8 @@ namespace TextBasedRPGGame
             this.shop = shop;
             this.fightEnemy = enemies;
             this.enemyList = enemyList;
+            this.shopList = shopList;
+
         }
 
 
@@ -82,5 +84,11 @@ namespace TextBasedRPGGame
             Console.WriteLine("Visit (S)hop");
         }
 
+
+
+
     }
+
+
+
 }

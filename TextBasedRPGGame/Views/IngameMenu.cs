@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TextBasedRPGGame.Views
 {
-    class IngameMenu
+    public class IngameMenu
     {
 
         public String Menu()

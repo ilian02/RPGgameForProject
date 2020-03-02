@@ -30,7 +30,7 @@ namespace TextBasedRPGGame
             inventory.Add(this.weapon);
             inventory.Add(this.armor);
            
-            charPlace = new Place("Starting Village", true, true, true, true, new List<Enemy>());
+            charPlace = new Place("Starting Village", true, true, true, true, new List<Enemy>(), new List<Item>());
             this.placeName = this.charPlace.name;
         }
 
