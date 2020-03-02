@@ -11,7 +11,7 @@ namespace TextBasedRPGGame.Views
 
         public Hero CharacterCreationMenu()
         {
-            Console.WriteLine("Pick a name for your new Hero: ");
+            Console.WriteLine("Pick a name for your new Hero:");
             return new Hero(Console.ReadLine(), 1, 1, 1, 1, 15);
         }
 

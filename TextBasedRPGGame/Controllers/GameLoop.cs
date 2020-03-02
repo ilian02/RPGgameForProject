@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextBasedRPGGame.Places;
 using TextBasedRPGGame.Views;
 
 namespace TextBasedRPGGame.Controllers
@@ -13,6 +14,7 @@ namespace TextBasedRPGGame.Controllers
         Hero hero;
         IngameMenu ingameMenu = new IngameMenu();
         CharacterInfo characterInfo = new CharacterInfo();
+        Bed bed = new Bed();
 
         public GameLoop(Hero hero)
         {
@@ -26,19 +28,26 @@ namespace TextBasedRPGGame.Controllers
 
             while (command != "e")
             {
-
+                Console.Clear();
                 switch (command)
                 {
                     case "c":
                         characterInfo.showCharacterInfo(hero);
                         break;
                     case "l":
-                        hero.charPlace.showPlaceInformation();
+                        switch(hero.charPlace.showPlaceInformation())
+                        {
+                            case "s":
+                                hero = bed.useBed(hero);
+                                break;
+                        }
                         break;
 
                 }
 
+
                 command = ingameMenu.Menu();
+
             }
         }
     }
