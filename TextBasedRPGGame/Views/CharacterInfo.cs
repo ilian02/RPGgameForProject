@@ -28,11 +28,7 @@ namespace TextBasedRPGGame.Views
         public void showInventory(Hero hero)
         {
 
-            foreach(Item item in hero.inventory)
-            {
-
-                Console.WriteLine(item.toString());
-            }
+            Utils.displayListOfItems(hero.inventory.inventory);
         }
 
 

@@ -12,10 +12,13 @@ namespace TextBasedRPGGame.Controllers
     {
 
         public Hero hero;
+
         public IngameMenu ingameMenu = new IngameMenu();
         public CharacterInfo characterInfo = new CharacterInfo();
+
         public Bed bed = new Bed();
         public Shop shop = new Shop();
+
         public Place place;
 
         public List<Item> shopItemsList = new List<Item>();
@@ -30,6 +33,7 @@ namespace TextBasedRPGGame.Controllers
         public void GameIsPlaying()
         {
             shopItemsList.Add(hero.weapon);
+            shopItemsList.Add(hero.armor);
 
 
             String command = ingameMenu.Menu();
@@ -37,7 +41,7 @@ namespace TextBasedRPGGame.Controllers
             while (command != "e")
             {
           
-                //Console.Clear();
+                Console.Clear();
                 switch (command)
                 {
                     case "c":
@@ -47,7 +51,7 @@ namespace TextBasedRPGGame.Controllers
                         switch(hero.charPlace.showPlaceInformation().ToLower())
                         {
                             case "s":
-                                hero = shop.showShop(hero, shopItemsList);
+                                hero = shop.showShopItems(hero, shopItemsList);
                                 break;
                             case "b":
                                 hero = bed.useBed(hero);

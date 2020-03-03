@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextBasedRPGGame.Items;
 
 namespace TextBasedRPGGame
 {
     public class Hero : LivingThing
     {
 
-        public List<Item> inventory;
+        public Inventory inventory;
 
 
         public int money { get; set; }
@@ -26,7 +27,7 @@ namespace TextBasedRPGGame
             this.armor = new Armor("Starter leather armor", 10, "armor", 5);
             experiencePoints = 0;
             money = 100;
-            inventory = new List<Item>();
+            inventory = new Inventory();
             inventory.Add(this.weapon);
             inventory.Add(this.armor);
            

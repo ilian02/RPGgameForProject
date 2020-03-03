@@ -53,7 +53,8 @@ namespace TextBasedRPGGame
 
 
 
-        public Place (String name, bool forge, bool bed, bool shop, bool enemies, List<Enemy> enemyList, List<Item> shopList)
+        public Place (String name, bool forge, bool bed, bool shop,/*
+            */bool enemies, List<Enemy> enemyList, List<Item> shopList)
         {
             this.name = name;
             this.forge = forge;
