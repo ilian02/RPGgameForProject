@@ -18,32 +18,14 @@ namespace TextBasedRPGGame
         public int level { get; set; }
         public String name { get; set; }
 
-        public void Attack(LivingThing enemy)
-        {
-            enemy.IsHit(this.strength);
-        }
-
-        public void IsHit(int damagePoints)
-        {
-            healthPoints -= damagePoints;
-            IsDead();
-        }
-
-        public bool IsDead()
-        {
-            if (healthPoints <= 0)
-                return true;
-            return false;
-        }
-
-        public LivingThing(String name, int strength, int vitality, int dexterity, int level, int currentHealthPoints)
+        public LivingThing(String name, int strength, int vitality, int dexterity, int level)
         {
             this.name = name;
             this.strength = strength;
             this.vitality = vitality;
             this.dexterity = dexterity;
             this.healthPoints = 10 + 5 * vitality;
-            this.currentHealthPoints = currentHealthPoints;
+            this.currentHealthPoints = 10 + 5 * vitality;
             this.level = level;
         }
 

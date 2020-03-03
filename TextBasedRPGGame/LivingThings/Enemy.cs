@@ -12,7 +12,7 @@ namespace TextBasedRPGGame
         public int xpGain { set; get; }
 
 
-        public Enemy(String name, int strength, int vitality, int dexterity, int level, int xpGain, int currentHealthPoints) :  base(name, strength, vitality, dexterity, level, currentHealthPoints)
+        public Enemy(String name, int strength, int vitality, int dexterity, int level, int xpGain) :  base(name, strength, vitality, dexterity, level)
         {
             this.xpGain = xpGain;
             this.currentHealthPoints = 5 + vitality * 5;

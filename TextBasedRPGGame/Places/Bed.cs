@@ -9,8 +9,6 @@ namespace TextBasedRPGGame.Places
     public class Bed
     {
 
-
-
         public Hero useBed(Hero hero)
         {
             Console.WriteLine("You are in an inn");

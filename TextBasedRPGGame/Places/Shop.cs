@@ -98,6 +98,7 @@ namespace TextBasedRPGGame.Places
                     hero.money -= itemPicked.sellPrice;
                     hero.inventory.Add(itemPicked);
                     Console.WriteLine("Item has been added to your inventory");
+                    Console.WriteLine("Current balance: " + hero.money);
                     Console.WriteLine();
                 }
                 else

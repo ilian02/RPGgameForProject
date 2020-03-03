@@ -19,6 +19,14 @@ namespace TextBasedRPGGame
             }
         }
 
+        public static void displayListOfEnemies(List<Enemy> enemies)
+        {
+            for (int i = 0; i < enemies.Count;i++)
+            {
+                Console.Write(i + 1 + ") ");
+                Console.WriteLine($"{enemies[i].name}, lvl {enemies[i].level}");
+            }
+        }
 
         public static void showItemInfo(Item item)
         {

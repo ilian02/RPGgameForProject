@@ -18,6 +18,7 @@ namespace TextBasedRPGGame.Controllers
 
         public Bed bed = new Bed();
         public Shop shop = new Shop();
+        public EnemyArena enemyArena = new EnemyArena();
 
         public Place place;
 
@@ -34,6 +35,11 @@ namespace TextBasedRPGGame.Controllers
         {
             shopItemsList.Add(hero.weapon);
             shopItemsList.Add(hero.armor);
+
+
+            Enemy goblin = new Enemy("Novice Goblin", 1, 1, 1, 1, 10);
+            enemyEncountersList.Add(goblin);
+
 
 
             String command = ingameMenu.Menu();
@@ -55,6 +61,9 @@ namespace TextBasedRPGGame.Controllers
                                 break;
                             case "b":
                                 hero = bed.useBed(hero);
+                                break;
+                            case "f":
+                                hero = enemyArena.pickEnemyToFight(hero, enemyEncountersList);
                                 break;
                         }
                         break;

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Controllers\GameCreation.cs" />
     <Compile Include="Controllers\GameLoop.cs" />
+    <Compile Include="Fights\Fight.cs" />
     <Compile Include="Items\Consumable.cs" />
     <Compile Include="Items\Inventory.cs" />
     <Compile Include="LivingThings\Enemy.cs" />
@@ -54,6 +55,7 @@
     <Compile Include="LivingThings\LivingThing.cs" />
     <Compile Include="Models\CharacterCreation.cs" />
     <Compile Include="Places\Bed.cs" />
+    <Compile Include="Places\EnemyArena.cs" />
     <Compile Include="Places\Forge.cs" />
     <Compile Include="Places\Place.cs" />
     <Compile Include="Places\Shop.cs" />

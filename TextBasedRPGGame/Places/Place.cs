@@ -13,13 +13,9 @@ namespace TextBasedRPGGame
 
 
         public String name { get; set; }
-
         public bool forge { get; set; }
-
         public bool bed { get; set; }
-
         public bool fightEnemy { get; set; }
-
         public bool shop { get; set; }
 
         
@@ -78,7 +74,7 @@ namespace TextBasedRPGGame
         }
         public void showFightEnemy()
         {
-            Console.WriteLine("Fight (E)nemies");
+            Console.WriteLine("Enemies to (F)ight");
         }
         public void showShop()
         {
