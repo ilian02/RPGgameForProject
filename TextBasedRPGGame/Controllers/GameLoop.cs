@@ -37,7 +37,7 @@ namespace TextBasedRPGGame.Controllers
             shopItemsList.Add(hero.armor);
 
 
-            Enemy goblin = new Enemy("Novice Goblin", 1, 1, 1, 1, 10);
+            Enemy goblin = new Enemy("Novice Goblin", 10, 1, 1, 1, 50);
             enemyEncountersList.Add(goblin);
 
 

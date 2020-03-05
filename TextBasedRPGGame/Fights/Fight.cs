@@ -9,8 +9,6 @@ namespace TextBasedRPGGame.Fights
 {
     public static class Fight
     {
-
-        
         public static Hero startFight(Hero hero, Enemy enemy)
         {
             while(hero.currentHealthPoints > 0 && enemy.currentHealthPoints > 0)
@@ -22,19 +20,18 @@ namespace TextBasedRPGGame.Fights
                 hero = heroGetAttacked(hero, enemy);
                 Console.WriteLine();
 
-                Thread.Sleep(4000);
+                Thread.Sleep(3000);
 
                 if (hero.currentHealthPoints <= 0)
                 {
                     Console.WriteLine("You lost");
                     hero.heroDied();
+                    break;
                 }
 
                 if (enemy.currentHealthPoints <= 0)
                 {
-                    hero.experiencePoints += enemy.xpGain;
-                    Console.WriteLine($"{enemy.name} has died");
-                    Console.WriteLine($"You get {enemy.xpGain} experience points");
+                    hero.enemyDied(enemy);
                 }
             }
             Console.WriteLine();

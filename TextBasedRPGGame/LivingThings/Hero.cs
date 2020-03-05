@@ -16,7 +16,7 @@ namespace TextBasedRPGGame
         public int money { get; set; }
         public Weapon weapon;
         public Armor armor;
-        public int experiencePoints;
+        public double experiencePoints;
         public Place charPlace;
         public String placeName;
 
@@ -43,7 +43,55 @@ namespace TextBasedRPGGame
             Console.WriteLine("Current health points: " + currentHealthPoints);
             money = money - (int)0.1 * money;
             
-            
+        }
+
+        
+        public void enemyDied(Enemy enemy)
+        {
+            experiencePoints += enemy.xpGain;
+            Console.WriteLine($"{enemy.name} has died");
+            Console.WriteLine($"You get {enemy.xpGain} experience points");
+            Console.WriteLine($"Current Health Points: {currentHealthPoints}");
+
+            checkForLevelUp();
+        }
+
+        public void checkForLevelUp()
+        {
+            if(experiencePoints >= level * 0.5 * 100)
+            {
+                levelUp();
+            }
+        }
+
+        public void levelUp()
+        {
+            Console.WriteLine();
+            Console.WriteLine("You leveled up!");
+            Console.WriteLine("Strenght: " + strength);
+            Console.WriteLine("Vitality: " + vitality);
+            Console.WriteLine("Dexterity: " + dexterity);
+            Console.WriteLine("(S), (V) or (D)");
+
+            string command = Console.ReadLine().ToLower();
+
+            switch (command)
+            {
+                case "s": strength++;
+                    break;
+                case "v": vitality++;
+                    break;
+                case "d": dexterity++;
+                    break;
+                default:
+                    Console.WriteLine("Invalid input!");
+                    levelUp();
+                    break;
+            }
+
+            Console.WriteLine("Health fully restored!");
+            healthPoints = 10 + vitality * 5;
+            currentHealthPoints = healthPoints;
         }
 
     }
