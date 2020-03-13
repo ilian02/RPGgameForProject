@@ -17,12 +17,13 @@ namespace TextBasedRPGGame.Places
 
             merchandise = items;
 
+            Console.WriteLine("Welcome to the shop.");
             Utils.displayListOfItems(merchandise);
-
 
             Console.WriteLine("Enter number of item, (S)ell items or (Q)uit");
 
             string command = Console.ReadLine().ToLower();
+            Console.WriteLine();
 
             if (command == "s")
             {
@@ -30,9 +31,19 @@ namespace TextBasedRPGGame.Places
             }else if (command == "q")
             {
                 return hero;
-            }      
-            
-            hero = itemPicked(merchandise[int.Parse(command) - 1], hero);
+            }
+
+            try
+            {
+                hero = itemPicked(merchandise[int.Parse(command) - 1], hero);
+            }
+            catch (Exception ex)
+            {
+                Console.Clear();
+                Console.WriteLine("Error: " + ex.Message);
+                Console.WriteLine();
+                showShopItems(hero, items);
+            }
 
             return hero;
         }
@@ -42,7 +53,8 @@ namespace TextBasedRPGGame.Places
 
         public Hero sellItems(Hero hero)
         {
-
+            Console.WriteLine();
+            Console.WriteLine("Items you can sell: ");
             Utils.displayListOfItems(hero.inventory.inventory);
 
             Console.WriteLine("Enter number of item to sell, (Q)uit or (G)o back");
@@ -56,20 +68,35 @@ namespace TextBasedRPGGame.Places
                 return showShopItems(hero, merchandise);
             }
 
-
-            Console.WriteLine($"Do you wish to sell {hero.inventory.inventory[int.Parse(command) - 1].name} this item for {hero.inventory.inventory[int.Parse(command) - 1].sellPrice}?");
-            Console.WriteLine("(Y) or (N)");
+            try
+            {
+                Console.WriteLine($"Do you wish to sell {hero.inventory.inventory[int.Parse(command) - 1].name} this item for {hero.inventory.inventory[int.Parse(command) - 1].sellPrice}?");
+                Console.WriteLine("(Y) or (N)");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error: " + ex.Message);
+                sellItems(hero);
+            }
 
             string commandForSale = Console.ReadLine().ToLower();
 
             if (commandForSale == "y")
             {
-                hero.money += hero.inventory.inventory[int.Parse(command) - 1].sellPrice;
-                hero.inventory.removeAt(int.Parse(command) - 1);
+                try
+                {
+                    hero.money += hero.inventory.inventory[int.Parse(command) - 1].sellPrice;
+                    hero.inventory.removeAt(int.Parse(command) - 1);
+                }
+                catch (Exception ex)
+                {
+                    Console.Clear();
+                    Console.WriteLine("Error: " + ex.Message);
+                    sellItems(hero);
+                }
                 Console.WriteLine("You sold an item!");
                 Console.WriteLine("Current gold: " + hero.money);
                 sellItems(hero);
-
             }
 
             return hero;

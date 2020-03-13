@@ -17,10 +17,15 @@ namespace TextBasedRPGGame.Places
 
             String command = Console.ReadLine().ToLower();
 
-            if(command == "y" && hero.money >= 15)
+            if (command == "y" && hero.money >= 15 && hero.currentHealthPoints == hero.healthPoints)
+            {
+                Console.WriteLine("You don't need to sleep yet!");
+            }
+            else if (command == "y" && hero.money >= 15)
             {
                 hero.currentHealthPoints = hero.healthPoints;
                 hero.money -= 15;
+                Console.WriteLine("You now have " + hero.healthPoints + "health points");
             }else if (command == "y" && hero.money <= 15)
             {
                 Console.WriteLine("You don't have enough money for this action");

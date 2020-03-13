@@ -32,7 +32,17 @@ namespace TextBasedRPGGame.Places
                 return hero;
             }
 
-            hero = Fight.startFight(hero, enemyTypes[int.Parse(command) - 1]);
+
+            try
+            {
+                hero = Fight.startFight(hero, enemyTypes[int.Parse(command) - 1]);
+            }
+            catch(Exception ex)
+            {
+                Console.Clear();
+                Console.WriteLine("Error: " + ex.Message);
+                pickEnemyToFight(hero, enemyEncounters);
+            }
 
             return hero;
         }

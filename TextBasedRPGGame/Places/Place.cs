@@ -81,11 +81,6 @@ namespace TextBasedRPGGame
             Console.WriteLine("Visit (S)hop");
         }
 
-
-
-
     }
-
-
 
 }
