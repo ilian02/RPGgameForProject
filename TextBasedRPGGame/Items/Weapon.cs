@@ -20,9 +20,12 @@ namespace TextBasedRPGGame
 
         public String toString()
         {
-            StringBuilder sb = new StringBuilder("name");
+            StringBuilder sb = new StringBuilder(name);
 
-            sb.Append($"Attack damage: {attackPoints}");
+            sb.Append($" - Attack damage: {attackPoints}");
+
+
+
 
             return sb.ToString();
         }

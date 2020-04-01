@@ -21,11 +21,13 @@ namespace TextBasedRPGGame.Items
         public void Add(Item item)
         {
             inventory.Add(item);
+            count++;
         }
 
         public void removeAt(int itemId)
         {
             inventory.RemoveAt(itemId);
+            count--;
         }
 
     }

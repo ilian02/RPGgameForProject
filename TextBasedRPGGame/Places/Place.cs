@@ -74,7 +74,7 @@ namespace TextBasedRPGGame
         }
         public void showFightEnemy()
         {
-            Console.WriteLine("Enemies to (F)ight");
+            Console.WriteLine("Got to (A)rena");
         }
         public void showShop()
         {
