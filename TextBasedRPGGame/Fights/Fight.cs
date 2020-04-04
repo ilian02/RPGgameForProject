@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TextBasedRPGGame.Views;
 
 namespace TextBasedRPGGame.Fights
 {
@@ -11,7 +12,7 @@ namespace TextBasedRPGGame.Fights
     {
         public static Hero startFight(Hero hero, Enemy enemy)
         {
-            while(hero.currentHealthPoints > 0 && enemy.currentHealthPoints > 0)
+            while(hero.CurrentHealthPoints > 0 && enemy.CurrentHealthPoints > 0)
             {
 
                 Console.WriteLine("Hero attacks: ");
@@ -22,14 +23,14 @@ namespace TextBasedRPGGame.Fights
 
                 Thread.Sleep(3000);
 
-                if (hero.currentHealthPoints <= 0)
+                if (hero.CurrentHealthPoints <= 0)
                 {
                     Console.WriteLine("You lost");
-                    hero.heroDied();
+                    hero = CharacterInfo.heroDied(hero);
                     break;
                 }
 
-                if (enemy.currentHealthPoints <= 0)
+                if (enemy.CurrentHealthPoints <= 0)
                 {
                     hero.enemyDied(enemy);
                 }
@@ -44,32 +45,32 @@ namespace TextBasedRPGGame.Fights
         {
             Random rand = new Random();
 
-            if (enemy.dexterity < hero.dexterity)
+            if (enemy.Dexterity < hero.Dexterity)
             {
-                if (rand.Next(11) > enemy.dexterity - hero.dexterity)
+                if (rand.Next(11) > enemy.Dexterity - hero.Dexterity)
                 {
-                    enemy.currentHealthPoints -= hero.strength * 2 + hero.weapon.attackPoints;
-                    Console.WriteLine($"{enemy.name} lost {hero.strength * 2 + hero.weapon.attackPoints}");
+                    enemy.CurrentHealthPoints -= hero.Strength * 2 + hero.Weapon.AttackPoints;
+                    Console.WriteLine($"{enemy.Name} lost {hero.Strength * 2 + hero.Weapon.AttackPoints}");
                 }
-                else Console.WriteLine($"{hero.name} missed!");
+                else Console.WriteLine($"{hero.Name} missed!");
             }
-            else if (enemy.dexterity > hero.dexterity)
+            else if (enemy.Dexterity > hero.Dexterity)
             {
-                if (rand.Next(6) > hero.dexterity - enemy.dexterity)
+                if (rand.Next(6) > hero.Dexterity - enemy.Dexterity)
                 {
-                    enemy.currentHealthPoints -= hero.strength * 2 + hero.weapon.attackPoints;
-                    Console.WriteLine($"{hero.name} lost {hero.strength * 2 + hero.weapon.attackPoints}");
+                    enemy.CurrentHealthPoints -= hero.Strength * 2 + hero.Weapon.AttackPoints;
+                    Console.WriteLine($"{hero.Name} lost {hero.Strength * 2 + hero.Weapon.AttackPoints}");
                 }
-                else Console.WriteLine($"{enemy.name} missed!");
+                else Console.WriteLine($"{enemy.Name} missed!");
             }
             else
             {
                 if (rand.Next(2) == 1)
                 {
-                    enemy.currentHealthPoints -= enemy.strength * 2;
-                    Console.WriteLine($"{enemy.name} lost {hero.strength * 2 + hero.weapon.attackPoints}");
+                    enemy.CurrentHealthPoints -= enemy.Strength * 2;
+                    Console.WriteLine($"{enemy.Name} lost {hero.Strength * 2 + hero.Weapon.AttackPoints}");
                 }
-                else Console.WriteLine($"{hero.name} missed!");
+                else Console.WriteLine($"{hero.Name} missed!");
             }
 
 
@@ -81,38 +82,38 @@ namespace TextBasedRPGGame.Fights
 
             Random rand = new Random();
 
-            if (enemy.strength * 2 < hero.armor.defencePoints)
+            if (enemy.Strength * 2 < hero.Armor.DefencePoints)
             {
-                Console.WriteLine($"{enemy.name} coundn't penetrate {hero.name}'s armor");
+                Console.WriteLine($"{enemy.Name} coundn't penetrate {hero.Name}'s armor");
                 return hero;
             }
 
-            if (enemy.dexterity > hero.dexterity)
+            if (enemy.Dexterity > hero.Dexterity)
             {
-                if (rand.Next(11) > enemy.dexterity - hero.dexterity)
+                if (rand.Next(11) > enemy.Dexterity - hero.Dexterity)
                 {
-                    hero.currentHealthPoints -= enemy.strength * 2 - hero.armor.defencePoints;
-                    Console.WriteLine($"{hero.name} lost {enemy.strength * 2 - hero.armor.defencePoints}");
+                    hero.CurrentHealthPoints -= enemy.Strength * 2 - hero.Armor.DefencePoints;
+                    Console.WriteLine($"{hero.Name} lost {enemy.Strength * 2 - hero.Armor.DefencePoints}");
                 }
-                else Console.WriteLine($"{enemy.name} missed!");
+                else Console.WriteLine($"{enemy.Name} missed!");
             }
-            else if (enemy.dexterity < hero.dexterity)
+            else if (enemy.Dexterity < hero.Dexterity)
             {
-                if (rand.Next(6) > hero.dexterity - enemy.dexterity)
+                if (rand.Next(6) > hero.Dexterity - enemy.Dexterity)
                 {
-                    hero.currentHealthPoints -= enemy.strength * 2 - hero.armor.defencePoints;
-                    Console.WriteLine($"{hero.name} lost {enemy.strength * 2 - hero.armor.defencePoints}");
+                    hero.CurrentHealthPoints -= enemy.Strength * 2 - hero.Armor.DefencePoints;
+                    Console.WriteLine($"{hero.Name} lost {enemy.Strength * 2 - hero.Armor.DefencePoints}");
                 }
-                else Console.WriteLine($"{enemy.name} missed!");
+                else Console.WriteLine($"{enemy.Name} missed!");
             }
             else
             {
                 if (rand.Next(2) == 1)
                 {
-                    hero.currentHealthPoints -= enemy.strength * 2 - hero.armor.defencePoints;
-                    Console.WriteLine($"{hero.name} lost {enemy.strength * 2 - hero.armor.defencePoints}");
+                    hero.CurrentHealthPoints -= enemy.Strength * 2 - hero.Armor.DefencePoints;
+                    Console.WriteLine($"{hero.Name} lost {enemy.Strength * 2 - hero.Armor.DefencePoints}");
                 }
-                else Console.WriteLine($"{enemy.name} missed!");
+                else Console.WriteLine($"{enemy.Name} missed!");
             }
     
             return hero;

@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="Controllers\GameCreation.cs" />
     <Compile Include="Controllers\GameLoop.cs" />
+    <Compile Include="Controllers\GameSetUp.cs" />
     <Compile Include="Fights\Fight.cs" />
     <Compile Include="Items\Consumable.cs" />
     <Compile Include="Items\Inventory.cs" />

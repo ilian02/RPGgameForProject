@@ -24,24 +24,24 @@ namespace TextBasedRPGGame
             for (int i = 0; i < enemies.Count;i++)
             {
                 Console.Write(i + 1 + ") ");
-                Console.WriteLine($"{enemies[i].name}, lvl {enemies[i].level}");
+                Console.WriteLine($"{enemies[i].Name}, lvl {enemies[i].Level}");
             }
         }
 
         public static void showItemInfo(Item item)
         {
-            Console.Write($"{item.name} for {item.sellPrice}. ");
-            if (item.type == "weapon")
+            Console.Write($"{item.Name} for {item.SellPrice}. ");
+            if (item.Type == "weapon")
             {
-                Console.WriteLine($"{((Weapon)item).attackPoints} attack points");
+                Console.WriteLine($"{((Weapon)item).AttackPoints} attack points");
             }
-            else if (item.type == "armor")
+            else if (item.Type == "armor")
             {
-                Console.WriteLine($"{((Armor)item).defencePoints} defence points");
+                Console.WriteLine($"{((Armor)item).DefencePoints} defence points");
             }
-            else if (item.type == "consumable")
+            else if (item.Type == "consumable")
             {
-                Console.WriteLine($"{((Consumable)item).healthPointsRegen} regen points");
+                Console.WriteLine($"{((Consumable)item).HealthPointsRegen} regen points");
             }
         }
     }

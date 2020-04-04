@@ -8,15 +8,28 @@ namespace TextBasedRPGGame
 {
     public class Enemy : LivingThing
     {
-           
-        public int xpGain { set; get; }
+
+        private int xpGain;
+        private int moneyGain;
 
 
-        public Enemy(String name, int strength, int vitality, int dexterity, int level, int xpGain) :  base(name, strength, vitality, dexterity, level)
+        public Enemy(String name, int strength, int vitality, int dexterity,int accuracy, int level, int xpGain, int moneyGain) :  base(name, strength, vitality, dexterity, accuracy, level)
         {
             this.xpGain = xpGain;
-            this.currentHealthPoints = 5 + vitality * 5;
+            this.CurrentHealthPoints = 5 + vitality * 5;
+            this.moneyGain = moneyGain;
+        }
 
+
+        public int XpGain
+        {
+            get { return xpGain; }
+            set { xpGain = value; }
+        }
+        public int MoneyGain
+        {
+            get { return moneyGain; }
+            set { moneyGain = value; }
         }
 
     }

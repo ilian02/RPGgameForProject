@@ -70,7 +70,7 @@ namespace TextBasedRPGGame.Places
 
             try
             {
-                Console.WriteLine($"Do you wish to sell {hero.inventory.inventory[int.Parse(command) - 1].name} this item for {hero.inventory.inventory[int.Parse(command) - 1].sellPrice}?");
+                Console.WriteLine($"Do you wish to sell {hero.inventory.inventory[int.Parse(command) - 1].Name} this item for {hero.inventory.inventory[int.Parse(command) - 1].SellPrice}?");
                 Console.WriteLine("(Y) or (N)");
             }
             catch (Exception ex)
@@ -85,7 +85,7 @@ namespace TextBasedRPGGame.Places
             {
                 try
                 {
-                    hero.money += hero.inventory.inventory[int.Parse(command) - 1].sellPrice;
+                    hero.Money += hero.inventory.inventory[int.Parse(command) - 1].SellPrice;
                     hero.inventory.removeAt(int.Parse(command) - 1);
                 }
                 catch (Exception ex)
@@ -95,7 +95,7 @@ namespace TextBasedRPGGame.Places
                     sellItems(hero);
                 }
                 Console.WriteLine("You sold an item!");
-                Console.WriteLine("Current gold: " + hero.money);
+                Console.WriteLine("Current gold: " + hero.Money);
                 sellItems(hero);
             }
 
@@ -112,7 +112,7 @@ namespace TextBasedRPGGame.Places
             Console.Clear();
 
             Utils.showItemInfo(itemPicked);
-            Console.WriteLine($"Do you wish to buy this item for {itemPicked.sellPrice}?");
+            Console.WriteLine($"Do you wish to buy this item for {itemPicked.SellPrice}?");
             Console.WriteLine("(Y) or (N)");
 
             string command = Console.ReadLine().ToLower();
@@ -120,12 +120,12 @@ namespace TextBasedRPGGame.Places
             
             if (command == "y")
             {
-                if (hero.money >= itemPicked.sellPrice)
+                if (hero.Money >= itemPicked.SellPrice)
                 {
-                    hero.money -= itemPicked.sellPrice;
+                    hero.Money -= itemPicked.SellPrice;
                     hero.inventory.Add(itemPicked);
                     Console.WriteLine("Item has been added to your inventory");
-                    Console.WriteLine("Current balance: " + hero.money);
+                    Console.WriteLine("Current balance: " + hero.Money);
                     Console.WriteLine();
                 }
                 else

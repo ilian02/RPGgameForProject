@@ -9,26 +9,28 @@ namespace TextBasedRPGGame
     public class Weapon : Item
     {
 
-        public int attackPoints { get; set; }
+        private int attackPoints;
 
         public Weapon(String name, int sellPrice, String type, int attackPoints) : base(name, sellPrice, type)
         {
             this.attackPoints = attackPoints;
-            this.type = "weapon";
-            this.name = name;
+            this.Type = "weapon";
+            this.Name = name;
         }
 
         public String toString()
         {
-            StringBuilder sb = new StringBuilder(name);
+            StringBuilder sb = new StringBuilder(Name);
 
             sb.Append($" - Attack damage: {attackPoints}");
-
-
-
-
             return sb.ToString();
         }
 
+
+        public int AttackPoints
+        {
+            get { return attackPoints; }
+            set { attackPoints = value; }
+        }
     }
 }

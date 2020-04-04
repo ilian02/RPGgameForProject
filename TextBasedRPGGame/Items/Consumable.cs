@@ -9,7 +9,7 @@ namespace TextBasedRPGGame.Items
     public class Consumable : Item
     {
 
-        public int healthPointsRegen { get; set; }
+        private int healthPointsRegen;
 
         public Consumable(string name, int sellPrice, string type, int healthPointsRegen) : base(name, sellPrice, type)
         {
@@ -24,6 +24,12 @@ namespace TextBasedRPGGame.Items
             sb.Append($"Health points regenerate: {healthPointsRegen}");
 
             return sb.ToString();
+        }
+
+        public int HealthPointsRegen
+        {
+            get { return healthPointsRegen; }
+            set { healthPointsRegen = value; }
         }
     }
 }

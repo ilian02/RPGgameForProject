@@ -14,22 +14,14 @@ namespace TextBasedRPGGame.Controllers
         List<Hero> heros = new List<Hero>();
         WelcomeMenu welcomeMenu = new WelcomeMenu();
         GameLoop gameLoop;
+        GameSetUp gameSetUp = new GameSetUp();
 
         public GameCreation()
         {
-
-            heros.Add(new Hero("pesho", 5,  3, 4, 6, 25));
-            heros.Add(new Hero("ivan", 55, 78, 25, 150, 100));
-            Place place = new Place("Starting Village", true, true, true, true, new List<Enemy>(), new List<Item>());
-            Place place2 = new Place("Second Village", true, true, false, true, new List<Enemy>(), new List<Item>());
-
-
-            heros[0].charPlace = place;
-            heros[1].charPlace = place;
+            heros = gameSetUp.getHeroes();
 
 
             String command = welcomeMenu.WelcomeMenuPrint();
-            
 
             switch(command)
             {
@@ -42,11 +34,6 @@ namespace TextBasedRPGGame.Controllers
                     break;
                
             }
-
-
-
         }
-
-
     }
 }

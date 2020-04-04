@@ -13,52 +13,43 @@ namespace TextBasedRPGGame
         public Inventory inventory;
 
 
-        public int money { get; set; }
-        public Weapon weapon;
-        public Armor armor;
-        public double experiencePoints;
-        public Place charPlace;
-        public String placeName;
+        private int money;
+        private Weapon weapon;
+        private Armor armor;
+        private double experiencePoints;
+        private Place charPlace;
+        private String placeName;
 
-        public Hero(String name, int strength, int vitality, int dexterity,/*
-            */int level, int currentHealthPoints) : base(name, strength, vitality, dexterity, level)
+        public Hero(String name, int strength, int vitality, int dexterity, int accuracy,/*
+            */int level, int currentHealthPoints, int money) : base(name, strength, vitality, dexterity, accuracy, level)
         {
             this.weapon = new Weapon("Wooden small sword", 10, "weapon", 1);
             this.armor = new Armor("Starter leather armor", 10, "armor", 1);
             experiencePoints = 0;
-            money = 100;
+            this.money = money;
             inventory = new Inventory();
             inventory.Add(this.weapon);
             inventory.Add(this.armor);
-            this.currentHealthPoints = currentHealthPoints;
+            this.CurrentHealthPoints = currentHealthPoints;
             charPlace = new Place("Starting Village", true, true, true, true, new List<Enemy>(), new List<Item>());
             this.placeName = this.charPlace.name;
-        }
-
-       public void heroDied()
-        {
-            Console.WriteLine("You died");
-            Console.WriteLine("You lost " + (int)0.1 * money + " gold");
-            currentHealthPoints = (10 + 5 * vitality) / 2;
-            Console.WriteLine("Current health points: " + currentHealthPoints);
-            money = money - (int)0.1 * money;
-            
         }
 
         
         public void enemyDied(Enemy enemy)
         {
-            experiencePoints += enemy.xpGain;
-            Console.WriteLine($"{enemy.name} has died");
-            Console.WriteLine($"You get {enemy.xpGain} experience points");
-            Console.WriteLine($"Current Health Points: {currentHealthPoints}");
+            experiencePoints += enemy.XpGain;
+            money += enemy.MoneyGain;
+            Console.WriteLine($"{enemy.Name} has died");
+            Console.WriteLine($"You get {enemy.XpGain} experience points and {enemy.MoneyGain} gold!");
+            Console.WriteLine($"Current Health Points: {CurrentHealthPoints}");
 
             checkForLevelUp();
         }
 
         public void checkForLevelUp()
         {
-            if(experiencePoints >= level * 0.5 * 100)
+            if(experiencePoints >= Level * 0.5 * 100)
             {
                 levelUp();
             }
@@ -68,20 +59,23 @@ namespace TextBasedRPGGame
         {
             Console.WriteLine();
             Console.WriteLine("You leveled up!");
-            Console.WriteLine("Strenght: " + strength);
-            Console.WriteLine("Vitality: " + vitality);
-            Console.WriteLine("Dexterity: " + dexterity);
-            Console.WriteLine("(S), (V) or (D)");
+            Console.WriteLine("Strenght: " + Strength);
+            Console.WriteLine("Vitality: " + Vitality);
+            Console.WriteLine("Dexterity: " + Dexterity);
+            Console.WriteLine("Accuracy: " + Accuracy);
+            Console.WriteLine("(S), (V), (D) or (A)");
 
             string command = Console.ReadLine().ToLower();
 
             switch (command)
             {
-                case "s": strength++;
+                case "s": Strength++;
                     break;
-                case "v": vitality++;
+                case "v": Vitality++;
                     break;
-                case "d": dexterity++;
+                case "d": Dexterity++;
+                    break;
+                case "a": Accuracy++;
                     break;
                 default:
                     Console.WriteLine("Invalid input!");
@@ -90,8 +84,47 @@ namespace TextBasedRPGGame
             }
 
             Console.WriteLine("Health fully restored!");
-            healthPoints = 10 + vitality * 5;
-            currentHealthPoints = healthPoints;
+            HealthPoints = 10 + Vitality * 5;
+            CurrentHealthPoints = HealthPoints;
+        }
+
+
+
+        public int Money
+        {
+            get { return money; }
+            set { money = value; }
+        }
+
+        public Weapon Weapon
+        {
+            get { return weapon; }
+            set { weapon = value; }
+        }
+
+        public Armor Armor
+        {
+            get { return armor; }
+            set { armor = value; }
+        }
+
+        public double ExperiencePoints
+        {
+            get { return experiencePoints; }
+            set { experiencePoints = value; }
+        }
+
+
+        public Place CharPlace
+        {
+            get { return charPlace; }
+            set { charPlace = value; }
+        }
+
+        public String PlaceName
+        {
+            get { return placeName; }
+            set { placeName = value; }
         }
 
     }

@@ -14,14 +14,14 @@ namespace TextBasedRPGGame.Views
             int i = 1;
             foreach(Hero hero in heros)
             {
-                Console.WriteLine($"{i}: {hero.name} / {hero.level} level");
+                Console.WriteLine($"{i}: {hero.Name} / {hero.Level} level");
                 i++;
             }
 
             Console.WriteLine("Please enter hero number to continue or 0 to go back");
 
             int command = int.Parse(Console.ReadLine());
-            Console.WriteLine("You have chosen - " + heros[command - 1].name);
+            Console.WriteLine("You have chosen - " + heros[command - 1].Name);
             return command  - 1;
         }
 

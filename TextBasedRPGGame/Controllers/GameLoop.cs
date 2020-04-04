@@ -14,7 +14,6 @@ namespace TextBasedRPGGame.Controllers
         public Hero hero;
 
         public IngameMenu ingameMenu = new IngameMenu();
-        public CharacterInfo characterInfo = new CharacterInfo();
 
         public Bed bed = new Bed();
         public Shop shop = new Shop();
@@ -34,11 +33,11 @@ namespace TextBasedRPGGame.Controllers
 
         public void GameIsPlaying()
         {
-            shopItemsList.Add(hero.weapon);
-            shopItemsList.Add(hero.armor);
+            shopItemsList.Add(hero.Weapon);
+            shopItemsList.Add(hero.Armor);
 
 
-            Enemy goblin = new Enemy("Novice Goblin", 1, 1, 1, 1, 10);
+            Enemy goblin = new Enemy("Novice Goblin", 1, 1, 1, 1, 1, 10, 15);
             enemyEncountersList.Add(goblin);
 
 
@@ -52,10 +51,10 @@ namespace TextBasedRPGGame.Controllers
                 switch (command)
                 {
                     case "c":
-                        characterInfo.showCharacterInfo(hero);
+                        CharacterInfo.showCharacterInfo(hero);
                         break;
                     case "l":
-                        switch(hero.charPlace.showPlaceInformation().ToLower())
+                        switch(hero.CharPlace.showPlaceInformation().ToLower())
                         {
                             case "s":
                                 hero = shop.showShopItems(hero, shopItemsList);

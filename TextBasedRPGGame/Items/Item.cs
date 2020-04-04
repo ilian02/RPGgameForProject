@@ -9,9 +9,9 @@ namespace TextBasedRPGGame
     public class Item
     {
 
-        public String name { get; set; }
-        public int sellPrice { get; set; }
-        public String type { get; set; }
+        private String name;
+        private int sellPrice;
+        private String type;
 
 
         public Item(String name, int sellPrice, String type)
@@ -37,5 +37,26 @@ namespace TextBasedRPGGame
 
             return sb.ToString();
         }
+
+
+        public String Name
+        {
+            get { return name; }
+            set { name = value; }
+        }
+
+        public int SellPrice
+        {
+            get { return sellPrice; }
+            set { sellPrice = value; }
+        }
+
+        public String Type
+        {
+            get { return type; }
+            set { type = value; }
+        }
     }
+
+
 }

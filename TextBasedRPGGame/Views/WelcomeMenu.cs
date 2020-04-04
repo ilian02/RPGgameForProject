@@ -23,7 +23,5 @@ namespace TextBasedRPGGame.Views
             return Console.ReadLine().ToLower();
         }
 
-
-        
     }
 }
