@@ -21,7 +21,6 @@ namespace TextBasedRPGGame
         
         public String showPlaceInformation()
         {
-            String command = "";
 
             Console.WriteLine($"You are in {name}");
             Console.WriteLine("-----------------------");
@@ -43,7 +42,7 @@ namespace TextBasedRPGGame
                 showFightEnemy();
             }
 
-            command = Console.ReadLine().ToLower();
+            String command = Console.ReadLine().ToLower();
             return command;
         }
 
@@ -74,7 +73,7 @@ namespace TextBasedRPGGame
         }
         public void showFightEnemy()
         {
-            Console.WriteLine("Got to (A)rena");
+            Console.WriteLine("Go to (A)rena");
         }
         public void showShop()
         {

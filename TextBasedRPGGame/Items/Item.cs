@@ -13,6 +13,7 @@ namespace TextBasedRPGGame
         private int sellPrice;
         private String type;
 
+        
 
         public Item(String name, int sellPrice, String type)
         {

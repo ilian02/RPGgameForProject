@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextBasedRPGGame.Items;
+using TextBasedRPGGame.Views;
+using TextBasedRPGGame;
 
 namespace TextBasedRPGGame.Places
 {
@@ -33,14 +35,22 @@ namespace TextBasedRPGGame.Places
                 return hero;
             }
 
-            try
+            if (int.TryParse(command, out int result))
             {
-                hero = itemPicked(merchandise[int.Parse(command) - 1], hero);
+                if (Utils.inArrayRange(merchandise.Count, result - 1))
+                {
+                    hero = itemPicked(merchandise[int.Parse(command) - 1], hero);
+                }
+                else
+                {
+                    Console.Clear();
+                    Console.WriteLine();
+                    showShopItems(hero, items);
+                }
             }
-            catch (Exception ex)
+            else
             {
                 Console.Clear();
-                Console.WriteLine("Error: " + ex.Message);
                 Console.WriteLine();
                 showShopItems(hero, items);
             }
@@ -68,36 +78,37 @@ namespace TextBasedRPGGame.Places
                 return showShopItems(hero, merchandise);
             }
 
-            try
+            if (int.TryParse(command, out int result))
             {
-                Console.WriteLine($"Do you wish to sell {hero.inventory.inventory[int.Parse(command) - 1].Name} this item for {hero.inventory.inventory[int.Parse(command) - 1].SellPrice}?");
-                Console.WriteLine("(Y) or (N)");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Error: " + ex.Message);
-                sellItems(hero);
-            }
-
-            string commandForSale = Console.ReadLine().ToLower();
-
-            if (commandForSale == "y")
-            {
-                try
+                if (Utils.inArrayRange(hero.inventory.count, result - 1))
                 {
-                    hero.Money += hero.inventory.inventory[int.Parse(command) - 1].SellPrice;
-                    hero.inventory.removeAt(int.Parse(command) - 1);
+                    string commandForSale = ItemBuyAndSellMenu.DoYouWishToSell(hero, result);
+
+                    if (commandForSale == "y")
+                    {
+                        Console.Clear();
+                        Console.WriteLine("You sold an item!");
+                        Console.WriteLine("Current gold: " + hero.Money);
+                        hero.inventory.removeAt(result - 1);
+                        Console.WriteLine();
+                        sellItems(hero);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
                     Console.Clear();
-                    Console.WriteLine("Error: " + ex.Message);
-                    sellItems(hero);
+                    Console.WriteLine("Invalid command!");
+                    hero = sellItems(hero);
                 }
-                Console.WriteLine("You sold an item!");
-                Console.WriteLine("Current gold: " + hero.Money);
-                sellItems(hero);
+
             }
+            else
+            {
+                Console.Clear();
+                Console.WriteLine("Invalid command!");
+                hero = showShopItems(hero, merchandise);
+            }
+
 
             return hero;
         }
@@ -112,11 +123,7 @@ namespace TextBasedRPGGame.Places
             Console.Clear();
 
             Utils.showItemInfo(itemPicked);
-            Console.WriteLine($"Do you wish to buy this item for {itemPicked.SellPrice}?");
-            Console.WriteLine("(Y) or (N)");
-
-            string command = Console.ReadLine().ToLower();
-            
+            string command = ItemBuyAndSellMenu.DoYouWishToBuy(itemPicked);          
             
             if (command == "y")
             {
@@ -135,7 +142,6 @@ namespace TextBasedRPGGame.Places
                 }
 
                 hero = showShopItems(hero, merchandise);
-
             }
 
             if (command == "n")

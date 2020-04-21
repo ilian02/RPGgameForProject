@@ -28,7 +28,7 @@ namespace TextBasedRPGGame.Places
                 }
             }
 
-            Console.WriteLine("Enter ID if item or (Q)uit");
+            Console.WriteLine("Enter ID of item or (Q)uit");
             string command = Console.ReadLine();
 
       

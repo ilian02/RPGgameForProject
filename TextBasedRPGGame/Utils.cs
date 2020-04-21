@@ -44,5 +44,14 @@ namespace TextBasedRPGGame
                 Console.WriteLine($"{((Consumable)item).HealthPointsRegen} regen points");
             }
         }
+
+        public static bool inArrayRange(int end, int index)
+        {
+            if (index >= 0 && index < end)
+            {
+                return true;
+            }
+            return false;
+        }
     }
 }

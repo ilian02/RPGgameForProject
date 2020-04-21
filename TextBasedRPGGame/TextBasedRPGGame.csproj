@@ -68,6 +68,7 @@
     <Compile Include="Views\CharacterInfo.cs" />
     <Compile Include="Views\CharacterSelect.cs" />
     <Compile Include="Views\IngameMenu.cs" />
+    <Compile Include="Views\ItemBuyAndSellMenu.cs" />
     <Compile Include="Views\WelcomeMenu.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -20,7 +20,19 @@ namespace TextBasedRPGGame.Items
 
         public void Add(Item item)
         {
-            inventory.Add(item);
+
+            switch (item.Type)
+            {
+                case "weapon":
+                    inventory.Add(new Weapon(item.Name, item.SellPrice, item.Type, ((Weapon)item).AttackPoints));
+                    break;
+                case "armor":
+                    inventory.Add(new Weapon(item.Name, item.SellPrice, item.Type, ((Armor)item).DefencePoints));
+                    break;
+
+            }
+
+            
             count++;
         }
 
