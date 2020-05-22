@@ -1,0 +1,380 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="projectDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.Enemies' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Enemies">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" Nullable="false" />
+          <Property Name="Healthpoints" Type="int" />
+          <Property Name="Current_healthpoints" Type="int" />
+          <Property Name="Vit" Type="int" Nullable="false" />
+          <Property Name="Dex" Type="int" Nullable="false" />
+          <Property Name="STR" Type="int" Nullable="false" />
+          <Property Name="ACC" Type="int" Nullable="false" />
+          <Property Name="Exp_Gain" Type="int" />
+          <Property Name="EnLevel" Type="int" />
+          <Property Name="Money_Gain" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.Equipments' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Equipments">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Points" Type="int" />
+          <Property Name="Owner_id" Type="int" Nullable="false" />
+          <Property Name="Is_equiped" Type="bit" />
+          <Property Name="Type" Type="nchar" MaxLength="50" />
+          <Property Name="Price" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.Heroes' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Heroes">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="10" />
+          <Property Name="HealthPoints" Type="int" />
+          <Property Name="Current_healthpoints" Type="int" />
+          <Property Name="Vit" Type="int" />
+          <Property Name="Dex" Type="int" />
+          <Property Name="Str" Type="int" />
+          <Property Name="Acc" Type="int" />
+          <Property Name="Exp" Type="int" />
+          <Property Name="Char_level" Type="int" />
+          <Property Name="Money" Type="int" />
+          <Property Name="Current_place" Type="int" />
+          <Property Name="Equiped_weapon_id" Type="int" />
+          <Property Name="Equiped_Armor_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.MarketItems' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="MarketItems">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+            
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Points" Type="int" Nullable="false" />
+          <Property Name="Type" Type="nchar" MaxLength="50" Nullable="false" />
+          <Property Name="Price" Type="int" />
+          <Property Name="PlaceSold_id" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'projectDB.dbo.Place' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nchar" MaxLength="50" />
+          <Property Name="Bed" Type="bit" />
+          <Property Name="Forge" Type="bit" />
+          <Property Name="Shop" Type="bit" />
+          <Property Name="Arena" Type="bit" />
+          <Property Name="Next_Place" Type="int" />
+          <Property Name="Prev_Place" Type="int" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityContainer Name="projectDBModelStoreContainer">
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Enemies" EntityType="Self.Enemies" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Enemies].[Id] AS [Id], 
+    [Enemies].[Name] AS [Name], 
+    [Enemies].[Healthpoints] AS [Healthpoints], 
+    [Enemies].[Current_healthpoints] AS [Current_healthpoints], 
+    [Enemies].[Vit] AS [Vit], 
+    [Enemies].[Dex] AS [Dex], 
+    [Enemies].[STR] AS [STR], 
+    [Enemies].[ACC] AS [ACC], 
+    [Enemies].[Exp_Gain] AS [Exp_Gain], 
+    [Enemies].[EnLevel] AS [EnLevel], 
+    [Enemies].[Money_Gain] AS [Money_Gain]
+    FROM [dbo].[Enemies] AS [Enemies]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Equipments" EntityType="Self.Equipments" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Equipments].[Id] AS [Id], 
+    [Equipments].[Name] AS [Name], 
+    [Equipments].[Points] AS [Points], 
+    [Equipments].[Owner_id] AS [Owner_id], 
+    [Equipments].[Is_equiped] AS [Is_equiped], 
+    [Equipments].[Type] AS [Type], 
+    [Equipments].[Price] AS [Price]
+    FROM [dbo].[Equipments] AS [Equipments]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Heroes" EntityType="Self.Heroes" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Heroes].[Id] AS [Id], 
+    [Heroes].[Name] AS [Name], 
+    [Heroes].[HealthPoints] AS [HealthPoints], 
+    [Heroes].[Current_healthpoints] AS [Current_healthpoints], 
+    [Heroes].[Vit] AS [Vit], 
+    [Heroes].[Dex] AS [Dex], 
+    [Heroes].[Str] AS [Str], 
+    [Heroes].[Acc] AS [Acc], 
+    [Heroes].[Exp] AS [Exp], 
+    [Heroes].[Char_level] AS [Char_level], 
+    [Heroes].[Money] AS [Money], 
+    [Heroes].[Current_place] AS [Current_place], 
+    [Heroes].[Equiped_weapon_id] AS [Equiped_weapon_id], 
+    [Heroes].[Equiped_Armor_id] AS [Equiped_Armor_id]
+    FROM [dbo].[Heroes] AS [Heroes]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="MarketItems" EntityType="Self.MarketItems" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [MarketItems].[Id] AS [Id], 
+    [MarketItems].[Name] AS [Name], 
+    [MarketItems].[Points] AS [Points], 
+    [MarketItems].[Type] AS [Type], 
+    [MarketItems].[Price] AS [Price], 
+    [MarketItems].[PlaceSold_id] AS [PlaceSold_id]
+    FROM [dbo].[MarketItems] AS [MarketItems]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="Place" EntityType="Self.Place" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Place].[Id] AS [Id], 
+    [Place].[Name] AS [Name], 
+    [Place].[Bed] AS [Bed], 
+    [Place].[Forge] AS [Forge], 
+    [Place].[Shop] AS [Shop], 
+    [Place].[Arena] AS [Arena], 
+    [Place].[Next_Place] AS [Next_Place], 
+    [Place].[Prev_Place] AS [Prev_Place]
+    FROM [dbo].[Place] AS [Place]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="projectDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Enemy">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" Nullable="true" />
+          <Property Name="Healthpoints" Type="Int32" />
+          <Property Name="Current_healthpoints" Type="Int32" />
+          <Property Name="Vit" Type="Int32" Nullable="false" />
+          <Property Name="Dex" Type="Int32" Nullable="false" />
+          <Property Name="STR" Type="Int32" Nullable="false" />
+          <Property Name="ACC" Type="Int32" Nullable="false" />
+          <Property Name="Exp_Gain" Type="Int32" />
+          <Property Name="EnLevel" Type="Int32" />
+          <Property Name="Money_Gain" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Hero">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="HealthPoints" Type="Int32" />
+          <Property Name="Current_healthpoints" Type="Int32" />
+          <Property Name="Vit" Type="Int32" />
+          <Property Name="Dex" Type="Int32" />
+          <Property Name="Str" Type="Int32" />
+          <Property Name="Acc" Type="Int32" />
+          <Property Name="Exp" Type="Int32" />
+          <Property Name="Char_level" Type="Int32" />
+          <Property Name="Money" Type="Int32" />
+          <Property Name="Current_place" Type="Int32" />
+          <Property Name="Equiped_weapon_id" Type="Int32" />
+          <Property Name="Equiped_Armor_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Place">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Bed" Type="Boolean" />
+          <Property Name="Forge" Type="Boolean" />
+          <Property Name="Shop" Type="Boolean" />
+          <Property Name="Arena" Type="Boolean" />
+          <Property Name="Next_Place" Type="Int32" />
+          <Property Name="Prev_Place" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="projectDBEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Enemies" EntityType="Self.Enemy" />
+          <EntitySet Name="Heroes" EntityType="Self.Hero" />
+          <EntitySet Name="Places" EntityType="Self.Place" />
+          <EntitySet Name="MarketItems" EntityType="projectDBModel.MarketItem" />
+          <EntitySet Name="Equipments" EntityType="projectDBModel.Equipment" />
+          <EntitySet Name="sysdiagrams" EntityType="projectDBModel.sysdiagram" />
+        </EntityContainer>
+        <EntityType Name="MarketItem">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Points" Type="Int32" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" Nullable="false" />
+          <Property Name="Price" Type="Int32" />
+          <Property Name="PlaceSold_id" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Equipment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Points" Type="Int32" />
+          <Property Name="Owner_id" Type="Int32" Nullable="false" />
+          <Property Name="Is_equiped" Type="Boolean" />
+          <Property Name="Type" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
+          <Property Name="Price" Type="Int32" />
+        </EntityType>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="projectDBModelStoreContainer" CdmEntityContainer="projectDBEntities">
+          <EntitySetMapping Name="Enemies">
+            <EntityTypeMapping TypeName="projectDBModel.Enemy">
+              <MappingFragment StoreEntitySet="Enemies">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Healthpoints" ColumnName="Healthpoints" />
+                <ScalarProperty Name="Current_healthpoints" ColumnName="Current_healthpoints" />
+                <ScalarProperty Name="Vit" ColumnName="Vit" />
+                <ScalarProperty Name="Dex" ColumnName="Dex" />
+                <ScalarProperty Name="STR" ColumnName="STR" />
+                <ScalarProperty Name="ACC" ColumnName="ACC" />
+                <ScalarProperty Name="Exp_Gain" ColumnName="Exp_Gain" />
+                <ScalarProperty Name="EnLevel" ColumnName="EnLevel" />
+                <ScalarProperty Name="Money_Gain" ColumnName="Money_Gain" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Heroes">
+            <EntityTypeMapping TypeName="projectDBModel.Hero">
+              <MappingFragment StoreEntitySet="Heroes">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="HealthPoints" ColumnName="HealthPoints" />
+                <ScalarProperty Name="Current_healthpoints" ColumnName="Current_healthpoints" />
+                <ScalarProperty Name="Vit" ColumnName="Vit" />
+                <ScalarProperty Name="Dex" ColumnName="Dex" />
+                <ScalarProperty Name="Str" ColumnName="Str" />
+                <ScalarProperty Name="Acc" ColumnName="Acc" />
+                <ScalarProperty Name="Exp" ColumnName="Exp" />
+                <ScalarProperty Name="Char_level" ColumnName="Char_level" />
+                <ScalarProperty Name="Money" ColumnName="Money" />
+                <ScalarProperty Name="Current_place" ColumnName="Current_place" />
+                <ScalarProperty Name="Equiped_weapon_id" ColumnName="Equiped_weapon_id" />
+                <ScalarProperty Name="Equiped_Armor_id" ColumnName="Equiped_Armor_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Places">
+            <EntityTypeMapping TypeName="projectDBModel.Place">
+              <MappingFragment StoreEntitySet="Place">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Bed" ColumnName="Bed" />
+                <ScalarProperty Name="Forge" ColumnName="Forge" />
+                <ScalarProperty Name="Shop" ColumnName="Shop" />
+                <ScalarProperty Name="Arena" ColumnName="Arena" />
+                <ScalarProperty Name="Next_Place" ColumnName="Next_Place" />
+                <ScalarProperty Name="Prev_Place" ColumnName="Prev_Place" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="MarketItems">
+            <EntityTypeMapping TypeName="projectDBModel.MarketItem">
+              <MappingFragment StoreEntitySet="MarketItems">
+                <ScalarProperty Name="PlaceSold_id" ColumnName="PlaceSold_id" />
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Equipments">
+            <EntityTypeMapping TypeName="projectDBModel.Equipment">
+              <MappingFragment StoreEntitySet="Equipments">
+                <ScalarProperty Name="Price" ColumnName="Price" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Is_equiped" ColumnName="Is_equiped" />
+                <ScalarProperty Name="Owner_id" ColumnName="Owner_id" />
+                <ScalarProperty Name="Points" ColumnName="Points" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="projectDBModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

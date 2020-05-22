@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextBasedRPGGame.Controllers;
+using TextBasedRPGGame.Controllers.ModelBusinesses;
+using TextBasedRPGGame.Database;
 
 namespace TextBasedRPGGame.Views
 {
@@ -11,27 +14,28 @@ namespace TextBasedRPGGame.Views
 
         public static void showCharacterInfo(Hero hero)
         {
-            Console.WriteLine($"{hero.Name} current stats: ");
-            Console.WriteLine($"Strenght: {hero.Strength}");
-            Console.WriteLine($"Vitality: {hero.Vitality}");
-            Console.WriteLine($"Dexterity: {hero.Dexterity}");
-            Console.WriteLine($"Accuracy: {hero.Accuracy}");
+            PlaceBusiness pb = new PlaceBusiness();
+
+            Console.WriteLine($"{hero.Name}\nCurrent stats: ");
+            Console.WriteLine($" Strenght: {hero.Strength}");
+            Console.WriteLine($" Vitality: {hero.Vitality}");
+            Console.WriteLine($" Dexterity: {hero.Dexterity}");
+            Console.WriteLine($" Accuracy: {hero.Accuracy}");
 
             Console.WriteLine($"Current HealthPoints: {hero.CurrentHealthPoints} / {hero.HealthPoints}.");
-            Console.WriteLine($"Current place is {hero.CharPlace.name}.");
+
+            Console.Write($"Current place is ");
+            string placeName = pb.Get(hero.PlaceId).Name.Trim();
+            Console.WriteLine(placeName + ".");
+
             Console.WriteLine($"Money balance: {hero.Money}.");
 
-            showInventory(hero);
+
+            Utils.OpenInventory(hero);
 
             Console.WriteLine();
             Console.WriteLine();
         }
-
-        public static void showInventory(Hero hero)
-        {
-            Utils.displayListOfItems(hero.inventory.inventory);
-        }
-
 
         public static Hero heroDied(Hero hero)
         {

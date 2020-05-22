@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using TextBasedRPGGame.Controllers;
 using TextBasedRPGGame.Views;
 
 namespace TextBasedRPGGame.Fights
@@ -12,112 +13,88 @@ namespace TextBasedRPGGame.Fights
     {
         public static Hero startFight(Hero hero, Enemy enemy)
         {
-            while(hero.CurrentHealthPoints > 0 && enemy.CurrentHealthPoints > 0)
+            HeroBusiness hb = new HeroBusiness();
+
+            Console.WriteLine("you fight!");
+            Random rand = new Random();
+
+            while (hero.CurrentHealthPoints >= 0 && enemy.CurrentHealthPoints >= 0)
             {
-
-                Console.WriteLine("Hero attacks: ");
-                enemy = enemyGetAttacked(hero, enemy);
-                Console.WriteLine("Enemy attacks: ");
-                hero = heroGetAttacked(hero, enemy);
-                Console.WriteLine();
-
-                Thread.Sleep(3000);
-
-                if (hero.CurrentHealthPoints <= 0)
-                {
-                    Console.WriteLine("You lost");
-                    hero = CharacterInfo.heroDied(hero);
-                    break;
-                }
+                enemy = heroAttack(enemy, hero, rand);
 
                 if (enemy.CurrentHealthPoints <= 0)
                 {
-                    hero.enemyDied(enemy);
+                    hero = hero.enemyDied(enemy, hero);
+                    break;
                 }
+
+                hero = enemyAttack(hero, enemy, rand);
+
+                
+
+                if (hero.CurrentHealthPoints <= 0)
+                {
+                    hero = hero.heroDied(hero);
+                    break;
+                }
+
+                hb.Update(hero);
             }
-            Console.WriteLine();
-            Console.WriteLine();
+
             return hero;
         }
 
-
-        public static Enemy enemyGetAttacked(Hero hero,Enemy enemy)
+        private static Hero enemyAttack(Hero hero, Enemy enemy, Random rand)
         {
-            Random rand = new Random();
+            int enemyAttackChance = rand.Next(0, enemy.Accuracy * 2);
+            int heroDodgeChance = rand.Next(0, (int)Math.Round((double)hero.Dexterity / 2));
 
-            if (enemy.Dexterity < hero.Dexterity)
+            if (enemyAttackChance > heroDodgeChance)
             {
-                if (rand.Next(11) > enemy.Dexterity - hero.Dexterity)
+                EquipmentBusiness eq = new EquipmentBusiness();
+                HeroBusiness hb = new HeroBusiness();
+
+                int heroDefencePoints = 0;
+                if (eq.GetEquipedByIdAndType(hero.Id, "Armor") != null)
                 {
-                    enemy.CurrentHealthPoints -= hero.Strength * 2 + hero.Weapon.AttackPoints;
-                    Console.WriteLine($"{enemy.Name} lost {hero.Strength * 2 + hero.Weapon.AttackPoints}");
+                    heroDefencePoints = (int)eq.GetEquipedByIdAndType(hero.Id, "Armor").Points;
                 }
-                else Console.WriteLine($"{hero.Name} missed!");
-            }
-            else if (enemy.Dexterity > hero.Dexterity)
+
+                if (enemy.Strength * 2 - heroDefencePoints > 0)
+                {
+                    hero.CurrentHealthPoints -= enemy.Strength * 2 - heroDefencePoints;
+                    Console.WriteLine(enemy.Name.Trim() + " deals " + (enemy.Strength * 2 - heroDefencePoints) + " damage to " + hero.Name.Trim() + "!");
+                    hb.Update(hero);
+                }else
+                {
+                    Console.WriteLine(enemy.Name.Trim() + " can't penetrade " + hero.Name.Trim() + "'s armor!");
+                }
+                
+            }else
             {
-                if (rand.Next(6) > hero.Dexterity - enemy.Dexterity)
-                {
-                    enemy.CurrentHealthPoints -= hero.Strength * 2 + hero.Weapon.AttackPoints;
-                    Console.WriteLine($"{hero.Name} lost {hero.Strength * 2 + hero.Weapon.AttackPoints}");
-                }
-                else Console.WriteLine($"{enemy.Name} missed!");
-            }
-            else
-            {
-                if (rand.Next(2) == 1)
-                {
-                    enemy.CurrentHealthPoints -= enemy.Strength * 2;
-                    Console.WriteLine($"{enemy.Name} lost {hero.Strength * 2 + hero.Weapon.AttackPoints}");
-                }
-                else Console.WriteLine($"{hero.Name} missed!");
+                Console.WriteLine(enemy.Name + " misses!");
             }
 
+            return hero;
+        }
 
+        private static Enemy heroAttack(Enemy enemy, Hero hero, Random rand)
+        {
+            int heroAttackChance = rand.Next(0, hero.Accuracy * 2);
+            int enemyDodgeChance = rand.Next(0, (int)Math.Ceiling((double)enemy.Dexterity / 2));
+
+            if (heroAttackChance > enemyDodgeChance)
+            {
+                EquipmentBusiness eq = new EquipmentBusiness();
+
+                enemy.CurrentHealthPoints -= hero.Strength + (int)eq.GetEquipedByIdAndType(hero.Id, "Weapon").Points;
+                Console.WriteLine(hero.Name.Trim() + " deals " + (enemy.Strength + (int)eq.GetEquipedByIdAndType(hero.Id, "Weapon").Points) + " damage to " + enemy.Name.Trim() + "!");
+
+            }else
+            {
+                Console.WriteLine(hero.Name.Trim() + " misses!");
+            }
             return enemy;
         }
-
-        public static Hero heroGetAttacked(Hero hero, Enemy enemy)
-        {
-
-            Random rand = new Random();
-
-            if (enemy.Strength * 2 < hero.Armor.DefencePoints)
-            {
-                Console.WriteLine($"{enemy.Name} coundn't penetrate {hero.Name}'s armor");
-                return hero;
-            }
-
-            if (enemy.Dexterity > hero.Dexterity)
-            {
-                if (rand.Next(11) > enemy.Dexterity - hero.Dexterity)
-                {
-                    hero.CurrentHealthPoints -= enemy.Strength * 2 - hero.Armor.DefencePoints;
-                    Console.WriteLine($"{hero.Name} lost {enemy.Strength * 2 - hero.Armor.DefencePoints}");
-                }
-                else Console.WriteLine($"{enemy.Name} missed!");
-            }
-            else if (enemy.Dexterity < hero.Dexterity)
-            {
-                if (rand.Next(6) > hero.Dexterity - enemy.Dexterity)
-                {
-                    hero.CurrentHealthPoints -= enemy.Strength * 2 - hero.Armor.DefencePoints;
-                    Console.WriteLine($"{hero.Name} lost {enemy.Strength * 2 - hero.Armor.DefencePoints}");
-                }
-                else Console.WriteLine($"{enemy.Name} missed!");
-            }
-            else
-            {
-                if (rand.Next(2) == 1)
-                {
-                    hero.CurrentHealthPoints -= enemy.Strength * 2 - hero.Armor.DefencePoints;
-                    Console.WriteLine($"{hero.Name} lost {enemy.Strength * 2 - hero.Armor.DefencePoints}");
-                }
-                else Console.WriteLine($"{enemy.Name} missed!");
-            }
-    
-            return hero;
-        }
-
     }
 }

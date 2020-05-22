@@ -15,6 +15,8 @@ namespace TextBasedRPGGame.Views
 
             Console.WriteLine("(L)ocation information");
 
+            Console.WriteLine("(I)nventory");
+
             return Console.ReadLine().ToLower();
         }
 

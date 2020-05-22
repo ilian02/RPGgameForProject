@@ -6,36 +6,41 @@ using System.Threading.Tasks;
 using TextBasedRPGGame.Items;
 using TextBasedRPGGame.Views;
 using TextBasedRPGGame;
+using TextBasedRPGGame.Controllers;
+using TextBasedRPGGame.Database;
+using TextBasedRPGGame.Controllers.ModelBusinesses;
 
 namespace TextBasedRPGGame.Places
 {
     public class Shop
     {
 
-        List<Item> merchandise = new List<Item>();
+        EquipmentBusiness equipmentBusiness = new EquipmentBusiness();
+        MarketItemsBusiness marketBusiness = new MarketItemsBusiness();
+        HeroBusiness heroBusiness = new HeroBusiness();
 
-        public Hero showShopItems(Hero hero, List<Item> items)
+        public Hero showShopItems(Hero hero)                      //Shop opening
         {
 
-            merchandise = items;
+             List<MarketItem> merchandise = marketBusiness.GetAllByPlaceId(hero.PlaceId);
 
-            Console.WriteLine("Welcome to the shop.");
+            Console.WriteLine("Welcome to the shop.");              
             Utils.displayListOfItems(merchandise);
 
-            Console.WriteLine("Enter number of item, (S)ell items or (Q)uit");
+            Console.WriteLine("Enter number of item, (S)ell items or (Q)uit");              //input
 
             string command = Console.ReadLine().ToLower();
             Console.WriteLine();
 
             if (command == "s")
             {
-                return hero = sellItems(hero);
+                return hero = sellItems(hero);                                      //selling command
             }else if (command == "q")
             {
                 return hero;
             }
 
-            if (int.TryParse(command, out int result))
+            if (int.TryParse(command, out int result))                                  
             {
                 if (Utils.inArrayRange(merchandise.Count, result - 1))
                 {
@@ -45,53 +50,57 @@ namespace TextBasedRPGGame.Places
                 {
                     Console.Clear();
                     Console.WriteLine();
-                    showShopItems(hero, items);
+                    showShopItems(hero);
                 }
             }
             else
             {
                 Console.Clear();
                 Console.WriteLine();
-                showShopItems(hero, items);
+                showShopItems(hero);
             }
 
             return hero;
         }
 
-       
+
 
 
         public Hero sellItems(Hero hero)
-        {
+        { 
             Console.WriteLine();
             Console.WriteLine("Items you can sell: ");
-            Utils.displayListOfItems(hero.inventory.inventory);
+            Utils.displayListOfItems(equipmentBusiness.GetAllByOwnerId(hero.Id));
+
+            List<Equipment> heroItems = equipmentBusiness.GetAllByOwnerId(hero.Id);
 
             Console.WriteLine("Enter number of item to sell, (Q)uit or (G)o back");
             string command = Console.ReadLine().ToLower();
 
-            if(command == "q")
+            if(command == "q")                  //quit shop menu
             {
                 return hero;
-            }else if (command == "g")
+            }else if (command == "g")           //back to shop menu buy page
             {
-                return showShopItems(hero, merchandise);
+                return showShopItems(hero);
             }
 
-            if (int.TryParse(command, out int result))
+            if (int.TryParse(command, out int result))          //check if input is int and in heroItems size
             {
-                if (Utils.inArrayRange(hero.inventory.count, result - 1))
+                if (Utils.inArrayRange(heroItems.Count, result - 1))
                 {
-                    string commandForSale = ItemBuyAndSellMenu.DoYouWishToSell(hero, result);
+                    string commandForSale = ItemBuyAndSellMenu.DoYouWishToSell(heroItems[result - 1]);      //Do you wish to sell menu
 
-                    if (commandForSale == "y")
+                    if (commandForSale == "y")                          //sell item and delete from DBcontext
                     {
                         Console.Clear();
                         Console.WriteLine("You sold an item!");
+                        hero.Money += (int)heroItems[result - 1].Price;
                         Console.WriteLine("Current gold: " + hero.Money);
-                        hero.inventory.removeAt(result - 1);
+                        heroBusiness.Update(hero);
+                        equipmentBusiness.Delete(heroItems[result - 1].Id);
                         Console.WriteLine();
-                        sellItems(hero);
+                        sellItems(hero);                        //back to selling item menu
                     }
                 }
                 else
@@ -106,7 +115,7 @@ namespace TextBasedRPGGame.Places
             {
                 Console.Clear();
                 Console.WriteLine("Invalid command!");
-                hero = showShopItems(hero, merchandise);
+                hero = showShopItems(hero);
             }
 
 
@@ -118,7 +127,7 @@ namespace TextBasedRPGGame.Places
             
         }
 
-        public Hero itemPicked(Item itemPicked, Hero hero)
+        public Hero itemPicked(MarketItem itemPicked, Hero hero)
         {
             Console.Clear();
 
@@ -127,10 +136,11 @@ namespace TextBasedRPGGame.Places
             
             if (command == "y")
             {
-                if (hero.Money >= itemPicked.SellPrice)
+                if (hero.Money >= itemPicked.Price)
                 {
-                    hero.Money -= itemPicked.SellPrice;
-                    hero.inventory.Add(itemPicked);
+                    hero.Money -= (int)itemPicked.Price;
+                    equipmentBusiness.AddNewItem(itemPicked, hero.Id);
+                    heroBusiness.Update(hero);
                     Console.WriteLine("Item has been added to your inventory");
                     Console.WriteLine("Current balance: " + hero.Money);
                     Console.WriteLine();
@@ -141,17 +151,17 @@ namespace TextBasedRPGGame.Places
                     Console.WriteLine();
                 }
 
-                hero = showShopItems(hero, merchandise);
+                hero = showShopItems(hero);
             }
 
             if (command == "n")
             {
-                hero = showShopItems(hero, merchandise);
+                hero = showShopItems(hero);
             }
 
             return hero;
         }
-
+        
      
 
     }

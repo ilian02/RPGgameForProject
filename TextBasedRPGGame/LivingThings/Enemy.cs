@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextBasedRPGGame.Database;
 
 namespace TextBasedRPGGame
 {
@@ -11,15 +12,24 @@ namespace TextBasedRPGGame
 
         private int xpGain;
         private int moneyGain;
+        private int id;
+        private int placeId;
 
-
-        public Enemy(String name, int strength, int vitality, int dexterity,int accuracy, int level, int xpGain, int moneyGain) :  base(name, strength, vitality, dexterity, accuracy, level)
+        public Enemy(EnemyModel enemy)
         {
-            this.xpGain = xpGain;
-            this.CurrentHealthPoints = 5 + vitality * 5;
-            this.moneyGain = moneyGain;
+            this.Id = enemy.Id;
+            this.Name = enemy.Name;
+            this.HealthPoints = (int)enemy.Healthpoints;
+            this.CurrentHealthPoints = (int)enemy.Current_healthpoints;
+            this.Vitality = enemy.Vit;
+            this.Dexterity = enemy.Dex;
+            this.Strength = enemy.STR;
+            this.Accuracy = enemy.ACC;
+            this.xpGain = (int)enemy.Exp_Gain;
+            this.Level = (int)enemy.EnLevel;
+            this.MoneyGain = (int)enemy.Money_Gain;
+            this.PlaceId = (int)enemy.Place_Id;
         }
-
 
         public int XpGain
         {
@@ -31,6 +41,15 @@ namespace TextBasedRPGGame
             get { return moneyGain; }
             set { moneyGain = value; }
         }
-
+        public int Id
+        {
+            get { return id; }
+            set { id = value; }
+        }
+        public int PlaceId
+        {
+            get { return placeId; }
+            set { placeId = value; }
+        }
     }
 }

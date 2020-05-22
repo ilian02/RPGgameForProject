@@ -18,7 +18,7 @@ namespace TextBasedRPGGame.Views
 
             Console.WriteLine("(C)reate new character");
             Console.WriteLine("(L)oad saved character");
-            Console.WriteLine("(A)bout the game");
+            Console.WriteLine("(D)atabase modifiations");
 
             return Console.ReadLine().ToLower();
         }

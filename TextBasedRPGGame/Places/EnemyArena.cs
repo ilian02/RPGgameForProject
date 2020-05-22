@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TextBasedRPGGame.Controllers;
+using TextBasedRPGGame.Database;
 using TextBasedRPGGame.Fights;
 
 namespace TextBasedRPGGame.Places
@@ -10,16 +12,20 @@ namespace TextBasedRPGGame.Places
     public class EnemyArena
     {
 
-        List<Enemy> enemyTypes;
+        List<EnemyModel> enemyTypes;
+        EnemyBusiness eb;
+
 
         public EnemyArena()
         {
-            this.enemyTypes = new List<Enemy>();
+            eb = new EnemyBusiness();
         }
 
-        public Hero pickEnemyToFight(Hero hero, List<Enemy> enemyEncounters)
+        public Hero pickEnemyToFight(Hero hero)
         {
-            enemyTypes = enemyEncounters;
+
+
+            enemyTypes = eb.GetAllByOwnerId(hero.PlaceId);
             Utils.displayListOfEnemies(enemyTypes);
 
 
@@ -32,16 +38,17 @@ namespace TextBasedRPGGame.Places
                 return hero;
             }
 
-
             try
             {
-                hero = Fight.startFight(hero, enemyTypes[int.Parse(command) - 1]);
+                Enemy enemy = new Enemy(enemyTypes[int.Parse(command) - 1]);
+
+                hero = Fight.startFight(hero, enemy);
             }
             catch(Exception ex)
             {
                 Console.Clear();
                 Console.WriteLine("Error: " + ex.Message);
-                pickEnemyToFight(hero, enemyEncounters);
+                pickEnemyToFight(hero);
             }
 
             return hero;

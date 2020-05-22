@@ -20,18 +20,6 @@ namespace TextBasedRPGGame
 
         private String name;
 
-        public LivingThing(String name, int strength, int vitality, int dexterity, int accuracy, int level)
-        {
-            this.name = name;
-            this.strength = strength;
-            this.vitality = vitality;
-            this.dexterity = dexterity;
-            this.accuracy = accuracy;
-            this.healthPoints = 10 + 5 * vitality;
-            this.currentHealthPoints = 10 + 5 * vitality;
-            this.level = level;
-        }
-
 
         public int HealthPoints
         {

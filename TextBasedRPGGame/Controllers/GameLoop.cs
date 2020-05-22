@@ -1,10 +1,13 @@
-﻿using System;
+﻿using Microsoft.Identity.Client;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TextBasedRPGGame.Places;
 using TextBasedRPGGame.Views;
+using TextBasedRPGGame.Database;
+using TextBasedRPGGame.Controllers.ModelBusinesses;
 
 namespace TextBasedRPGGame.Controllers
 {
@@ -12,36 +15,24 @@ namespace TextBasedRPGGame.Controllers
     {
 
         public Hero hero;
+        public Place place;
 
         public IngameMenu ingameMenu = new IngameMenu();
 
-        public Bed bed = new Bed();
-        public Shop shop = new Shop();
-        public Forge forge = new Forge();
-        public EnemyArena enemyArena = new EnemyArena();
+        public PlaceBusiness placeBusiness = new PlaceBusiness();
+        public HeroBusiness heroBusiness = new HeroBusiness();
+      
 
-        public Place place;
-
-        public List<Item> shopItemsList = new List<Item>();
-        public List<Enemy> enemyEncountersList = new List<Enemy>();
-
+        
         public GameLoop(Hero hero)
         {
             this.hero = hero;
+            place = new Place(placeBusiness.Get(this.hero.PlaceId));
             GameIsPlaying();
         }
-
+        
         public void GameIsPlaying()
         {
-            shopItemsList.Add(hero.Weapon);
-            shopItemsList.Add(hero.Armor);
-
-
-            Enemy goblin = new Enemy("Novice Goblin", 1, 1, 1, 1, 1, 10, 15);
-            enemyEncountersList.Add(goblin);
-
-
-
             String command = ingameMenu.Menu();
 
             while (command != "e")
@@ -53,30 +44,55 @@ namespace TextBasedRPGGame.Controllers
                     case "c":
                         CharacterInfo.showCharacterInfo(hero);
                         break;
-                    case "l":
-                        switch(hero.CharPlace.showPlaceInformation().ToLower())
-                        {
-                            case "s":
-                                hero = shop.showShopItems(hero, shopItemsList);
-                                break;
-                            case "b":
-                                hero = bed.useBed(hero);
-                                break;
-                            case "a":
-                                hero = enemyArena.pickEnemyToFight(hero, enemyEncountersList);
-                                break;
-                            case "f":
-                                hero = forge.showForgeOptions(hero);
-                                break;
-                        }
+                    case "i":
+                        hero = hero.OpenInventory(hero);
                         break;
-
+                    case "l":
+                        showPlaceInfo();
+                        break;
                 }
-
-
                 command = ingameMenu.Menu();
 
             }
         }
+
+        public void showPlaceInfo()
+        {
+            string placeCommand = place.showPlaceInformation();
+
+            if (placeCommand == "s" && place.Shop == true)
+            {
+                Shop shop = new Shop();
+                hero = shop.showShopItems(hero);
+            }
+            else if (placeCommand == "b" && place.Bed == true)
+            {
+                Bed bed = new Bed();
+                hero = bed.useBed(hero);
+            }
+            else if (placeCommand == "a" && place.Arena == true)
+            {
+                EnemyArena enemyArena = new EnemyArena();
+                hero = enemyArena.pickEnemyToFight(hero);
+            }
+            else if (placeCommand == "f" && place.Forge == true)
+            {
+                Forge forge = new Forge();
+                hero = forge.showForgeOptions(hero);
+            }
+            else if (placeCommand == "n" && place.NextPlace != null)
+            {
+                place = place.goToNextPlace();
+                hero.PlaceId = place.Id;
+                heroBusiness.Update(hero);
+            }
+            else if (placeCommand == "p" && place.PrevPlace != null)
+            {
+                place = place.goToPrevPlace();
+                hero.PlaceId = place.Id;
+                heroBusiness.Update(hero);
+            }
+        }
+
     }
 }
