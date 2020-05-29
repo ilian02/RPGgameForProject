@@ -16,7 +16,7 @@ namespace TextBasedRPGGame.Places
 
             Console.WriteLine("You are in an inn");
             Console.WriteLine($"You are currently at {hero.CurrentHealthPoints} out of {hero.HealthPoints}");
-            Console.WriteLine("Do you wish to sleep and regenerate your Health Points for 15 gold? (Y) or (N)");
+            Console.WriteLine("Do you wish to sleep and regenerate your Health Points for 5 gold? (Y) or (N)");
 
             String command = Console.ReadLine().ToLower();
 
