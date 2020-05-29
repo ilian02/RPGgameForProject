@@ -13,7 +13,7 @@ namespace TextBasedRPGGame.Views
         public static String DoYouWishToSell(Equipment item)
         {
 
-            Console.WriteLine($"Do you wish to sell {item.Name.Trim()}  for {(int)item.Price/2}?");
+            Console.WriteLine($"Do you wish to sell {item.Name.Trim()} for {(int)item.Price/2}?");
             Console.WriteLine("(Y) or (N)");
 
             return Console.ReadLine().ToLower();

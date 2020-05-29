@@ -65,7 +65,7 @@ namespace TextBasedRPGGame.Controllers
                         Console.WriteLine($" {i}: {place.Name.Trim()} / {place.Id} Id");
                         i++;
                     }
-                    ChangeMarketItemTable();
+                    ChangePlaceTable();
                     break;
                 case "a":
                     PlaceModel newPlace = new PlaceModel();
@@ -88,7 +88,7 @@ namespace TextBasedRPGGame.Controllers
 
                     placeBusiness.Add(newPlace);
                     Console.Clear();
-                    ChangeMarketItemTable();
+                    ChangePlaceTable();
                     break;
                 case "d":
                     int j = 1;
@@ -101,7 +101,7 @@ namespace TextBasedRPGGame.Controllers
                     int deleteNumber = int.Parse(Console.ReadLine());
                     placeBusiness.Delete(places[deleteNumber - 1].Id);
                     Console.Clear();
-                    ChangeMarketItemTable();
+                    ChangePlaceTable();
                     break;
                 default:
                     ChooseTable();
@@ -170,7 +170,7 @@ namespace TextBasedRPGGame.Controllers
                     int i = 1;
                     foreach (EnemyModel enemy in enemies)
                     {
-                        Console.WriteLine($" {i}: {enemy.Name.Trim()} / {enemy.EnLevel} level / {places[(int)enemy.Place_Id].Name.Trim()}");
+                        Console.WriteLine($" {i}: {enemy.Name.Trim()} / {enemy.EnLevel} level / {places[(int)enemy.Place_Id - 1].Name.Trim()}");
                         i++;
                     }
 

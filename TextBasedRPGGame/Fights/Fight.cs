@@ -20,6 +20,7 @@ namespace TextBasedRPGGame.Fights
 
             while (hero.CurrentHealthPoints >= 0 && enemy.CurrentHealthPoints >= 0)
             {
+             
                 enemy = heroAttack(enemy, hero, rand);
 
                 if (enemy.CurrentHealthPoints <= 0)
@@ -38,13 +39,15 @@ namespace TextBasedRPGGame.Fights
                     break;
                 }
 
+                
+
                 hb.Update(hero);
             }
 
             return hero;
         }
 
-        private static Hero enemyAttack(Hero hero, Enemy enemy, Random rand)
+        public static Hero enemyAttack(Hero hero, Enemy enemy, Random rand)
         {
             int enemyAttackChance = rand.Next(0, enemy.Accuracy * 2);
             int heroDodgeChance = rand.Next(0, (int)Math.Round((double)hero.Dexterity / 2));
@@ -72,7 +75,7 @@ namespace TextBasedRPGGame.Fights
                 
             }else
             {
-                Console.WriteLine(enemy.Name + " misses!");
+                Console.WriteLine(enemy.Name.Trim() + " misses!");
             }
 
             return hero;
@@ -87,8 +90,14 @@ namespace TextBasedRPGGame.Fights
             {
                 EquipmentBusiness eq = new EquipmentBusiness();
 
-                enemy.CurrentHealthPoints -= hero.Strength + (int)eq.GetEquipedByIdAndType(hero.Id, "Weapon").Points;
-                Console.WriteLine(hero.Name.Trim() + " deals " + (enemy.Strength + (int)eq.GetEquipedByIdAndType(hero.Id, "Weapon").Points) + " damage to " + enemy.Name.Trim() + "!");
+                int heroAttackPoints = hero.Strength;
+                if (eq.GetEquipedByIdAndType(hero.Id, "Weapon") != null)
+                {
+                    heroAttackPoints += (int)eq.GetEquipedByIdAndType(hero.Id, "Weapon").Points;
+                }
+
+                enemy.CurrentHealthPoints -= heroAttackPoints;
+                Console.WriteLine(hero.Name.Trim() + " deals " + heroAttackPoints + " damage to " + enemy.Name.Trim() + "!");
 
             }else
             {

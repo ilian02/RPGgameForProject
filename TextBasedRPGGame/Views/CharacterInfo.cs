@@ -23,12 +23,14 @@ namespace TextBasedRPGGame.Views
             Console.WriteLine($" Accuracy: {hero.Accuracy}");
 
             Console.WriteLine($"Current HealthPoints: {hero.CurrentHealthPoints} / {hero.HealthPoints}.");
+            Console.Write($"Level: {hero.Level}.");
+            Console.WriteLine($" Experience Points: {hero.ExperiencePoints} / { hero.Level * 50}.");
 
             Console.Write($"Current place is ");
             string placeName = pb.Get(hero.PlaceId).Name.Trim();
             Console.WriteLine(placeName + ".");
 
-            Console.WriteLine($"Money balance: {hero.Money}.");
+            Console.WriteLine($"Money balance: {hero.Money}$.");
 
 
             Utils.OpenInventory(hero);

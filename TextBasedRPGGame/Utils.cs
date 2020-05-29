@@ -38,7 +38,7 @@ namespace TextBasedRPGGame
                 Console.WriteLine(" Empty");
             for (int i = 0; i < items.Count; i++)
             {
-                Console.Write(" " + (i + 1) + ") " + items[i].Name.Trim() + " " + items[i].Points);
+                Console.WriteLine(" " + (i + 1) + ") " + items[i].Name.Trim() + " " + items[i].Points);
             }
         }
 
@@ -70,8 +70,8 @@ namespace TextBasedRPGGame
 
         public static void showItemInfo(MarketItem item)
         {
-            Console.Write($"{item.Name} for {item.Price}. ");
-            Console.Write($"{item.Points} ");
+            Console.Write($"{item.Name.Trim()} for {item.Price}. ");
+            Console.Write($"{item.Points} Points. ");
 
             switch(item.Type)
             {

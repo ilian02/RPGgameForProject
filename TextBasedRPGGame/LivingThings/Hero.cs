@@ -46,7 +46,7 @@ namespace TextBasedRPGGame
         {
             hero.ExperiencePoints += enemy.XpGain;
             hero.Money += enemy.MoneyGain;
-            Console.WriteLine($"{enemy.Name} has died");
+            Console.WriteLine($"{enemy.Name.Trim()} has died");
             Console.WriteLine($"You get {enemy.XpGain} experience points and {enemy.MoneyGain} gold!");
             Console.WriteLine($"Current Health Points: {CurrentHealthPoints}");
 
@@ -117,10 +117,9 @@ namespace TextBasedRPGGame
 
         public void checkForLevelUp()
         {
-            if(experiencePoints >= Level * 0.5 * 100)
+            if(experiencePoints >= Level * 50)
             {
                 levelUp();
-
             }
         }
 

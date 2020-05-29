@@ -30,6 +30,7 @@ namespace TextBasedRPGGame.Places
 
             Utils.displayListOfItems(weaponsInInventory);
 
+            Console.WriteLine();
             Console.WriteLine("Enter ID of item or (Q)uit");
             string command = Console.ReadLine();
 
